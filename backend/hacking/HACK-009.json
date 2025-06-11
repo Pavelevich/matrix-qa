@@ -1,0 +1,10 @@
+{
+  "key": "HACK-009",
+  "summary": "File Upload Vulnerability Testing",
+  "description": "Test file upload functionality for security vulnerabilities",
+  "category": "File Upload Testing",
+  "severity": "High",
+  "testing_type": "Vulnerability Assessment",
+  "target": "File upload forms",
+  "instructions": "Navigate to the target website and locate any file upload functionality (profile pictures, document uploads, etc.). Perform these tests: 1) File type bypass - try uploading files with extensions like .php, .asp, .jsp, .sh 2) Double extensions - upload files named like image.jpg.php 3) MIME type manipulation - upload a PHP file but change its content-type to image/jpeg 4) Path traversal - try uploading with filenames like ../../evil.php 5) Large file upload - test file size limitations 6) Special characters in filename - use characters like ', \", ;, |, & in filenames 7) Upload HTML files with XSS payloads. For each test, observe the server response and check if the file was accepted and where it was stored. Document any successful uploads of potentially malicious files and their accessible locations."
+}

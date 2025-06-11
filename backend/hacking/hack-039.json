@@ -1,0 +1,10 @@
+{
+    "key": "HACK-039",
+    "summary": "XXE via File Upload (SVG)",
+    "description": "Bypass file upload filters by embedding an XXE payload within a seemingly benign SVG image file.",
+    "category": "Input Validation Testing",
+    "severity": "Critical",
+    "testing_type": "Penetration Test",
+    "target": "File upload functionality that processes images",
+    "instructions": "1. Locate a file upload form that accepts SVGs.\n2. Craft a malicious SVG file with an XXE payload: `<svg><!DOCTYPE foo [<!ENTITY xxe SYSTEM \"file:///etc/hostname\">]><text>&xxe;</text></svg>`.\n3. Upload the file. If the rendered image contains the server's hostname, the XML parser is vulnerable. Document the SVG payload."
+}

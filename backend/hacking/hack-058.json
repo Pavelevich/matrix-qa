@@ -1,0 +1,10 @@
+{
+    "key": "HACK-058",
+    "summary": "GraphQL Batching Attack",
+    "description": "Abuse GraphQL's query batching feature to bypass rate-limiting and perform large-scale enumeration or brute-force attacks.",
+    "category": "API Security",
+    "severity": "Medium",
+    "testing_type": "Vulnerability Assessment",
+    "target": "GraphQL endpoints",
+    "instructions": "1. Identify a GraphQL endpoint.\n2. Craft a single HTTP request that contains an array of multiple, independent GraphQL queries. For example, trying to guess a 2FA code: `[{\"query\":\"query { checkCode(code:1111) }\"}, {\"query\":\"query { checkCode(code:1112) }\"}, ...]`\n3. If the server processes all queries in the batch as a single request, it bypasses rate limits enforced on a per-request basis. Document the successful batched request."
+}

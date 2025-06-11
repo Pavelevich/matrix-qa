@@ -1,0 +1,10 @@
+{
+    "key": "HACK-035",
+    "summary": "HTTP Desync (TE.CL Variant)",
+    "description": "Exploit request processing discrepancies using a Transfer-Encoding: chunked request followed by a Content-Length header, targeting different server/proxy combinations than CL.TE.",
+    "category": "Protocol Exploit",
+    "severity": "Critical",
+    "testing_type": "Penetration Test",
+    "target": "Reverse proxies and load balancers",
+    "instructions": "1. This test is the reverse of HACK-012, designed for systems that prioritize Transfer-Encoding.\n2. Craft a request where the TE chunk size misrepresents the actual content, followed by a valid CL header.\n3. The goal is to have the front-end process the chunked encoding while the back-end uses the Content-Length, causing a desync.\n4. Observe responses for unexpected content or time delays. Document the exact request that caused the desync."
+}

@@ -1,0 +1,10 @@
+{
+    "key": "HACK-021",
+    "summary": "HTTP Verb Tampering",
+    "description": "Bypass access control restrictions by using a different HTTP verb (e.g., GET, POST, PUT) than expected on a specific endpoint.",
+    "category": "Access Control Bypass",
+    "severity": "Medium",
+    "testing_type": "Vulnerability Assessment",
+    "target": "API endpoints with method-specific access controls",
+    "instructions": "1. Identify an API endpoint that is intended for a specific action, e.g., a `POST` request to `/api/users/create`.\n2. Using the browser's `fetch` API in the console, attempt to access the same endpoint using a different verb, such as `GET`.\n3. `fetch('/api/users/create', { method: 'GET' }).then(res => console.log(res.status, res.statusText));`\n4. If an endpoint that should be restricted to `POST` responds with a 200 OK to a `GET` request (potentially leaking data or form structures), the access control is weak. Document the endpoint and the verb that bypassed security."
+}

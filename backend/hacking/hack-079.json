@@ -1,0 +1,10 @@
+{
+    "key": "HACK-079",
+    "summary": "CRLF Injection in Response Headers",
+    "description": "Inject Carriage Return/Line Feed (CRLF) characters into a parameter that is reflected in a response header to split the header and inject new ones.",
+    "category": "Client-Side Vulnerability",
+    "severity": "High",
+    "testing_type": "Penetration Test",
+    "target": "Parameters reflected in response headers",
+    "instructions": "1. Find a parameter that is reflected in a response header, such as a redirect URL in the `Location` header.\n2. Inject URL-encoded CRLF characters (`%0d%0a`) followed by a new header. Example: `?next=/%0d%0aInjected-Header:foobar`.\n3. Inspect the response headers in the developer tools. If `Injected-Header: foobar` appears, the application is vulnerable. This can be escalated to XSS by injecting a new response body."
+}

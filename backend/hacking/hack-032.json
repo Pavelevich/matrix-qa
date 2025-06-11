@@ -1,0 +1,10 @@
+{
+    "key": "HACK-032",
+    "summary": "Serverless Function Injection",
+    "description": "Inject malicious data or commands into parameters passed to serverless functions to manipulate their execution.",
+    "category": "Remote Code Execution",
+    "severity": "Critical",
+    "testing_type": "Penetration Test",
+    "target": "API Gateway endpoints backed by serverless functions",
+    "instructions": "1. Identify API endpoints that likely trigger serverless functions.\n2. If a function processes user input to perform a system command (e.g., image resizing), attempt command injection: `\"; ls -la; #`.\n3. Look for error messages that leak internal function state or IAM role names. This is critical for follow-up attacks. Document the vulnerable parameter and the response indicating anomalous execution."
+}

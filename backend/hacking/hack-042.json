@@ -1,0 +1,10 @@
+{
+    "key": "HACK-042",
+    "summary": "Vertical Privilege Escalation",
+    "description": "As a standard user, attempt to access API endpoints or web pages that should be reserved for administrators.",
+    "category": "Access Control",
+    "severity": "High",
+    "testing_type": "Penetration Test",
+    "target": "Admin-only functions and API endpoints",
+    "instructions": "1. Log in as a standard user.\n2. Enumerate potential admin URLs by testing common paths: `/admin`, `/dashboard`, `/manage`.\n3. Use the browser's `fetch` API to directly call API endpoints that sound administrative, even if there is no UI link: `fetch('/api/v1/users/delete?id=123', {method:'POST'})`.\n4. A 200 OK or 403 Forbidden response is more interesting than a 404 Not Found. If you can access or trigger any admin function, the control is broken."
+}

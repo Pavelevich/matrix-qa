@@ -1,0 +1,10 @@
+{
+    "key": "HACK-014",
+    "summary": "Web Cache Deception",
+    "description": "Trick a web cache into storing and serving sensitive, user-specific information to other users.",
+    "category": "Information Disclosure",
+    "severity": "High",
+    "testing_type": "Penetration Test",
+    "target": "Caching proxies and CDNs",
+    "instructions": "1. Authenticate to the application.\n2. Navigate to a page containing sensitive account information (e.g., `/my-account`).\n3. In the address bar, append a path for a non-existent static file, for example: `/my-account/profile.css`.\n4. Check the network tab. If the server responds with a 200 OK containing your sensitive page content AND the response headers indicate it was cached (e.g., `X-Cache: HIT`, `Cache-Control: public`), it's vulnerable.\n5. Open a new, unauthenticated browser session and navigate to the same URL (`.../profile.css`). If your sensitive data is displayed, document this critical information leak."
+}

@@ -1,0 +1,10 @@
+{
+    "key": "HACK-053",
+    "summary": "Exposed Debug Endpoints",
+    "description": "Probe for common framework debug endpoints that may have been left enabled in the production environment.",
+    "category": "Information Disclosure",
+    "severity": "Medium",
+    "testing_type": "Vulnerability Assessment",
+    "target": "Framework configuration",
+    "instructions": "1. Navigate to common debug paths on the target domain.\n2. Test for `/debug/pprof` (Go), `/actuator/env` or `/actuator/heapdump` (Spring Boot), and other framework-specific endpoints.\n3. A 200 OK response containing debug information confirms the endpoint is exposed. This can leak sensitive configuration, environment variables, or memory contents."
+}

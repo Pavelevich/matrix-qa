@@ -1,0 +1,10 @@
+{
+    "key": "HACK-033",
+    "summary": "Container Escape Probing via Web Shell",
+    "description": "If a file upload vulnerability is found and a web shell is established, use it to probe for container escape vectors.",
+    "category": "Container Security",
+    "severity": "Critical",
+    "testing_type": "Chained Exploit",
+    "target": "Containerized application environments",
+    "instructions": "1. Pre-requisite: An RCE/shell vulnerability must be found.\n2. From the shell, run `cat /proc/1/cgroup` to check if inside a container.\n3. Probe for the Docker socket: `ls -la /var/run/docker.sock`. If it exists and is writable, you can escape.\n4. Check for overly permissive capabilities: `capsh --print`. Document any findings that indicate a path to host access."
+}

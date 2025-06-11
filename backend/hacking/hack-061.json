@@ -1,0 +1,10 @@
+{
+    "key": "HACK-061",
+    "summary": "JWT Key Confusion Attack (RS256->HS256)",
+    "description": "Trick the server into verifying an RS256-signed token using a symmetric HS256 algorithm by providing the public key as the secret key.",
+    "category": "Authentication Bypass",
+    "severity": "Critical",
+    "testing_type": "Penetration Test",
+    "target": "JWT-based authentication using RS256",
+    "instructions": "1. Capture a valid JWT signed with RS256. Obtain the server's public key (often exposed at a /.well-known/jwks.json endpoint).\n2. Decode the JWT header. Modify the 'alg' parameter from 'RS256' to 'HS256'.\n3. Create a new signature for the token using the *public key* as the HMAC secret.\n4. Re-assemble the token with the modified header and new signature. Use this token in a request to a protected endpoint.\n5. If the server grants access, it has been tricked into using the wrong algorithm. Document the forged token and the successful request."
+}

@@ -1,0 +1,10 @@
+{
+    "key": "HACK-063",
+    "summary": "DOM Clobbering",
+    "description": "Overwrite global variables or DOM elements with controlled HTML elements to disrupt or hijack client-side logic.",
+    "category": "Client-Side Vulnerability",
+    "severity": "High",
+    "testing_type": "Vulnerability Assessment",
+    "target": "JavaScript code that references global variables",
+    "instructions": "1. Identify client-side JavaScript that checks for a global variable before performing a sensitive action (e.g., `if (window.isAdmin) { ... }`).\n2. Find an input that is rendered as HTML on the page without proper sanitization (e.g., a comment field).\n3. Inject an HTML element with an `id` matching the global variable: `<a id=isAdmin>`. This 'clobbers' the global variable `window.isAdmin`, making it truthy.\n4. Observe if the sensitive JavaScript logic is now executed. Document the injection point and the resulting logic bypass."
+}

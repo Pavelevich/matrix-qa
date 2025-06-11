@@ -1,0 +1,10 @@
+{
+    "key": "HACK-081",
+    "summary": "Blind SSRF Exfiltration via DNS Rebinding",
+    "description": "Bypass SSRF protections by using a DNS rebinding attack where a domain first resolves to a permitted IP, then to an internal/forbidden IP.",
+    "category": "Chained Exploit",
+    "severity": "Critical",
+    "testing_type": "Penetration Test",
+    "target": "SSRF defenses",
+    "instructions": "1. This requires a specialized DNS service that you control, or a public one like `rbndr.us`.\n2. Set up a domain (e.g., `A.B.rbndr.us`) to first resolve to a public IP, then to an internal IP like `127.0.0.1` after a short TTL.\n3. Pass this domain to the SSRF-vulnerable feature. The server's first check will see the public IP and allow the request.\n4. When the actual request is made moments later, the DNS will have 'rebound' to the internal IP, bypassing the check and hitting the internal target. This confirms the vulnerability."
+}

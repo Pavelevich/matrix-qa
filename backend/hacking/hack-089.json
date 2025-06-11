@@ -1,0 +1,10 @@
+{
+    "key": "HACK-089",
+    "summary": "Exploiting Edge Computing Logic Flaws",
+    "description": "Test logic deployed on edge computing platforms (like Cloudflare Workers or AWS Lambda@Edge) for flaws that differ from the origin server's behavior.",
+    "category": "Business Logic Bypass",
+    "severity": "High",
+    "testing_type": "Penetration Test",
+    "target": "Edge computing platforms",
+    "instructions": "1. Fingerprint if the application uses an edge computing provider.\n2. Test for discrepancies. For example, an edge worker might perform authentication checks, but a path you discover might bypass the worker and go directly to the origin, which may be less secure.\n3. Test for caching logic flaws at the edge that could lead to serving stale, incorrect, or private data.\n4. The goal is to find inconsistencies between the edge logic and the origin logic. Document any such bypass."
+}

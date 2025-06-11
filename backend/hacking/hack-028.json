@@ -1,0 +1,10 @@
+{
+    "key": "HACK-028",
+    "summary": "Insecure Cross-Origin Resource Sharing (CORS) Policy",
+    "description": "Check if the CORS policy improperly reflects arbitrary origins, allowing a malicious site to perform two-way interaction with the vulnerable application.",
+    "category": "Security Misconfiguration",
+    "severity": "High",
+    "testing_type": "Security Assessment",
+    "target": "API endpoints",
+    "instructions": "1. Identify an API endpoint used by the application, especially one that requires authentication.\n2. Open the browser console on any other website (e.g., `google.com`).\n3. Use `fetch` to make a request to the target API endpoint, specifying a custom `Origin` header. `fetch('https://target-api.com/data', { headers: { 'Origin': 'https://evil.com' } });`\n4. Inspect the response headers in the network tab. If the server responds with `Access-Control-Allow-Origin: https://evil.com` or `Access-Control-Allow-Origin: *` for an authenticated endpoint, the policy is insecure.\n5. Document the request and the vulnerable response headers."
+}

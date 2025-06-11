@@ -1,0 +1,10 @@
+{
+    "key": "HACK-046",
+    "summary": "API Endpoint Inventory through Source Code",
+    "description": "Scour JavaScript files for relative URLs to discover undocumented, staging, or internal API endpoints.",
+    "category": "Information Disclosure",
+    "severity": "Low",
+    "testing_type": "Reconnaissance",
+    "target": "Client-side JavaScript files",
+    "instructions": "1. Open the browser's developer tools and go to the 'Sources' or 'Debugger' tab.\n2. Systematically examine every JavaScript file loaded by the application.\n3. Search for strings that look like API paths, such as `/api/`, `/v1/`, `/internal/`, or `/_staged/`.\n4. Compile a list of all discovered endpoints. These can be tested for other vulnerabilities."
+}

@@ -1,0 +1,10 @@
+{
+    "key": "HACK-067",
+    "summary": "GraphQL Alias Overloading for DoS",
+    "description": "Craft a single GraphQL query using many aliases to request the same resource field hundreds of times, potentially exhausting server resources.",
+    "category": "Denial of Service",
+    "severity": "Medium",
+    "testing_type": "Penetration Test",
+    "target": "GraphQL endpoints",
+    "instructions": "1. Identify a valid GraphQL query and a field within it.\n2. Using a GraphQL client, craft a query that requests the same field repeatedly using aliases. Example: `query { f1: someField, f2: someField, f3: someField, ... (repeat 500 times) }`.\n3. Send this single query to the server.\n4. If the server's response time degrades significantly or it returns an error, it is not properly limiting query complexity and is vulnerable to DoS. Document the query and the server response time."
+}

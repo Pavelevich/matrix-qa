@@ -1,0 +1,10 @@
+{
+    "key": "HACK-074",
+    "summary": "SameSite Cookie Bypass",
+    "description": "Test for misconfigurations in `SameSite` cookie attributes that fail to protect against cross-site attacks, especially when combined with other request types.",
+    "category": "Session Management",
+    "severity": "Medium",
+    "testing_type": "Security Assessment",
+    "target": "Session cookies",
+    "instructions": "1. Inspect the application's session cookie. Check the `SameSite` attribute. `None` is insecure without `Secure`. `Lax` can be bypassed by top-level navigation (e.g., a simple link click).\n2. If `SameSite=Lax`, create a test page with a link that points to a sensitive action on the target site (e.g., `https://target.com/delete_account?id=123`).\n3. If `SameSite=None` but the `Secure` flag is missing, the cookie will be sent over HTTP, vulnerable to MITM.\n4. The goal is to find a scenario where a cross-site request successfully includes the session cookie. Document the cookie flags and the bypass method."
+}

@@ -1,0 +1,10 @@
+{
+    "key": "HACK-037",
+    "summary": "Leaked .env Files",
+    "description": "Probe for common environment configuration files (`.env`) left exposed on the web server.",
+    "category": "Sensitive Data Exposure",
+    "severity": "High",
+    "testing_type": "Vulnerability Assessment",
+    "target": "Web server configuration",
+    "instructions": "1. Navigate directly to common paths for environment files.\n2. Test the following URLs: `https://target.com/.env`, `https://target.com/api/.env`, `https://target.com/backend/.env`, `https://target.com/.env.local`.\n3. If the browser downloads or displays a file containing key-value pairs (e.g., `DB_PASSWORD=...`), the file is exposed.\n4. Document the URL and screenshot the contents, redacting sensitive values."
+}

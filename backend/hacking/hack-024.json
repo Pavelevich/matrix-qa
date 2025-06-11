@@ -1,0 +1,10 @@
+{
+    "key": "HACK-024",
+    "summary": "Blind SQL Injection (Time-Based)",
+    "description": "Confirm SQL injection vulnerability by injecting time-delay payloads and measuring server response time.",
+    "category": "Input Validation Testing",
+    "severity": "Critical",
+    "testing_type": "Vulnerability Assessment",
+    "target": "Database-connected forms and parameters",
+    "instructions": "1. Identify a parameter in the URL or a form field that is likely processed by a database (e.g., a product ID, user ID).\n2. Using the browser's network inspector, measure the baseline response time for a normal request.\n3. Inject a time-based payload into the parameter. For MS-SQL: `' OR 1=1; WAITFOR DELAY '00:00:05'--`. For PostgreSQL: `' OR 1=1; SELECT pg_sleep(5)--`. For MySQL: `' OR 1=1 AND SLEEP(5)--`.\n4. Send the request and measure the response time again.\n5. If the response time is approximately 5 seconds longer than the baseline, the application is vulnerable to blind SQLi. Document the parameter, payload, and the response times."
+}

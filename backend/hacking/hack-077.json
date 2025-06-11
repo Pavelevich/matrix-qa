@@ -1,0 +1,10 @@
+{
+    "key": "HACK-077",
+    "summary": "HTTP Desync (CL.0 Attack)",
+    "description": "Exploit a server that ignores the Content-Length header when it has a value of 0, allowing for request smuggling.",
+    "category": "Protocol Exploit",
+    "severity": "High",
+    "testing_type": "Penetration Test",
+    "target": "Front-end / back-end server architectures",
+    "instructions": "1. This is a specific variant of request smuggling. Find a POST endpoint.\n2. Craft a request using an intercepting proxy or browser extension. The request should have `Content-Length: 0` and be immediately followed by a second, malicious request in the same data packet.\n3. Example: `POST /some-path HTTP/1.1\\r\\nHost: target.com\\r\\nContent-Length: 0\\r\\n\\r\\nGET /admin HTTP/1.1\\r\\nHost: target.com\\r\\n...`\n4. If the front-end server forwards both requests because it ignores the CL:0, but the back-end processes them sequentially, a desync occurs. Document the request and the back-end's response."
+}

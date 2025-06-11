@@ -1,0 +1,10 @@
+{
+    "key": "HACK-065",
+    "summary": "Unicode Normalization/Equivalency Bypass",
+    "description": "Bypass security filters (e.g., for XSS or path traversal) by using alternative Unicode representations of forbidden characters.",
+    "category": "Input Validation Testing",
+    "severity": "Medium",
+    "testing_type": "Vulnerability Assessment",
+    "target": "Input sanitization filters",
+    "instructions": "1. Identify an input field with a known security filter (e.g., one that blocks `<script>`).\n2. Use a Unicode character that normalizes to a standard character. For example, the full-width less-than sign `＜` (U+FF1C) might be normalized to `<` (U+003C) on the server *after* the security check.\n3. Craft a payload using these full-width or alternative characters: `＜script＞alert(1)＜/script＞`.\n4. If the payload executes, the filter is vulnerable to normalization flaws. Document the exact payload and injection point."
+}

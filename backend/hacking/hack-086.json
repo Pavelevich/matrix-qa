@@ -1,0 +1,10 @@
+{
+    "key": "HACK-086",
+    "summary": "Exploiting Out-of-Band Application Interactions",
+    "description": "Test features that interact with external systems (e.g., email processing, PDF generators) for out-of-band vulnerabilities like SSRF or XXE.",
+    "category": "Application Logic",
+    "severity": "High",
+    "testing_type": "Penetration Test",
+    "target": "Features with asynchronous/external interactions",
+    "instructions": "1. Identify a feature like 'Export to PDF' or 'Email this page'.\n2. In the data that will be processed (e.g., the content of the page to be PDF'd), embed an HTML payload that would trigger an SSRF if rendered by a headless browser on the server: `<iframe src=\"http://169.254.169.254\"></iframe>`.\n3. Trigger the function and monitor an external server you control for an incoming request (e.g., DNS or HTTP hit from the PDF generator).\n4. A successful callback confirms an out-of-band vulnerability."
+}

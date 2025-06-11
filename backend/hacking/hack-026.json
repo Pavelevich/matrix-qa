@@ -1,0 +1,10 @@
+{
+    "key": "HACK-026",
+    "summary": "Credential Stuffing Attack Simulation",
+    "description": "Test a login form for basic protections against automated credential stuffing attacks, such as account lockout or rate limiting.",
+    "category": "Authentication Security",
+    "severity": "Medium",
+    "testing_type": "Security Assessment",
+    "target": "Login forms",
+    "instructions": "1. Navigate to the login form.\n2. Attempt to log in with a valid username and an incorrect password five times in a row.\n3. After the fifth attempt, observe the application's response. A robust application should temporarily lock the account or present a CAPTCHA.\n4. If you can continue attempting to log in indefinitely with no mitigation, the form is vulnerable to brute-force or credential stuffing attacks.\n5. Document the login behavior after multiple failed attempts."
+}

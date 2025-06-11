@@ -1,0 +1,10 @@
+{
+    "key": "HACK-055",
+    "summary": "Prototype Pollution (Server-Side)",
+    "description": "Craft malicious JSON payloads to pollute the prototype of objects on the server, leading to DoS, RCE, or privilege escalation.",
+    "category": "Remote Code Execution",
+    "severity": "Critical",
+    "testing_type": "Penetration Test",
+    "target": "Server-side JavaScript (Node.js) applications",
+    "instructions": "1. Identify API endpoints that accept a JSON body.\n2. Send a request with a payload designed to pollute the base Object prototype. Example: `{\"__proto__\":{\"isAdmin\":true}}`.\n3. This is a blind attack. To confirm, you must find a follow-up request or code path that behaves differently if the pollution was successful (e.g., a subsequent check for `isAdmin` now passes). A DoS can also be triggered by polluting `Object.prototype.toString`."
+}

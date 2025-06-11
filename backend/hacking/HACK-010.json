@@ -1,0 +1,10 @@
+{
+  "key": "HACK-010",
+  "summary": "Business Logic Vulnerability Testing",
+  "description": "Test for business logic flaws and privilege escalation",
+  "category": "Business Logic Testing",
+  "severity": "High",
+  "testing_type": "Logic Flaw Assessment",
+  "target": "Application workflow",
+  "instructions": "Navigate to the target website and test business logic vulnerabilities: 1) Parameter manipulation - if you find forms with hidden fields or parameters, try modifying values (prices, quantities, user IDs) 2) Workflow bypass - try accessing later steps in a process without completing earlier ones 3) Race conditions - if possible, try submitting the same form multiple times rapidly 4) Privilege escalation - try accessing admin functions by guessing URLs like /admin/users, /admin/delete 5) Access control - try modifying user ID parameters to access other users' data 6) Payment bypass - if there's e-commerce functionality, test for price manipulation 7) Authentication bypass - try accessing protected pages directly. Use browser developer tools to modify form values, parameters, and headers. Document any successful bypasses, unauthorized access, or ability to manipulate application behavior beyond intended functionality."
+}

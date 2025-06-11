@@ -1,0 +1,10 @@
+{
+    "key": "HACK-051",
+    "summary": "Exposed CI/CD Variables",
+    "description": "Search client-side code for variables and tokens left over from the Continuous Integration / Continuous Deployment (CI/CD) pipeline.",
+    "category": "Sensitive Data Exposure",
+    "severity": "High",
+    "testing_type": "Reconnaissance",
+    "target": "Client-side JavaScript",
+    "instructions": "1. Examine all JavaScript files loaded by the application.\n2. Search for common CI/CD variable names, such as `CI_`, `GITHUB_`, `GITLAB_`, `TRAVIS_`, `API_KEY`, `SECRET_TOKEN`.\n3. Sometimes these are embedded during the build process. If any such variables are found with non-placeholder values, document them immediately."
+}

@@ -1,0 +1,10 @@
+{
+    "key": "HACK-062",
+    "summary": "Insecure 'Magic Link' Authentication Exploit",
+    "description": "Exploit weaknesses in one-time-use login links, such as lack of expiration, token predictability, or susceptibility to bruteforcing.",
+    "category": "Authentication Bypass",
+    "severity": "High",
+    "testing_type": "Security Assessment",
+    "target": "Passwordless login flows",
+    "instructions": "1. Request a magic link for an account you control. Note the token's format and length.\n2. After using the link, attempt to use it again. If it still works, the token is not invalidated upon use.\n3. Request several links and analyze the tokens for predictability. If they are not cryptographically random (e.g., Base64-encoded timestamps), attempt to forge a token for a victim user.\n4. Document any successful reuse or forgery of a magic link token."
+}

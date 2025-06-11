@@ -1,0 +1,10 @@
+{
+    "key": "HACK-059",
+    "summary": "Virtual Host Brute-Forcing via Host Header",
+    "description": "Discover unlinked or internal applications on the same server by brute-forcing the Host header.",
+    "category": "Reconnaissance",
+    "severity": "Low",
+    "testing_type": "Infrastructure Assessment",
+    "target": "Web server configuration",
+    "instructions": "1. Using a browser extension or `fetch`, send requests to the target IP address.\n2. Systematically change the `Host` header to common or guessed hostnames (e.g., `dev.target.com`, `internal.target.com`, `staging.target.com`, `admin.target.com`).\n3. A change in the response page (e.g., a different site, a login page, a 200 OK instead of a default page) indicates a new virtual host was discovered.\n4. Document all discovered hostnames and their corresponding pages."
+}

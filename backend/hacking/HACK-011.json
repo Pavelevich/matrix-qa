@@ -1,0 +1,10 @@
+{
+  "key": "HACK-011",
+  "summary": "Comprehensive Security Assessment",
+  "description": "Perform a complete security evaluation of the target website",
+  "category": "Comprehensive Testing",
+  "severity": "Critical",
+  "testing_type": "Full Security Audit",
+  "target": "Complete web application",
+  "instructions": "Navigate to the target website and perform a comprehensive security assessment combining all testing categories: 1) Information gathering - check robots.txt, configuration files, and technology fingerprinting 2) Input validation - test all forms for XSS and SQL injection 3) Authentication testing - verify login security and session management 4) Authorization testing - check for privilege escalation and access control bypasses 5) SSL/TLS verification - validate certificate and encryption implementation 6) Security headers analysis - verify all security headers are present and configured correctly 7) Error handling review - test for information disclosure in error messages 8) File upload testing (if available) - test for malicious file upload capabilities. Create a comprehensive report documenting: vulnerability type, location, severity level, impact, proof of concept with screenshots, and remediation recommendations for each finding. Prioritize critical findings like SQL injection and authentication bypasses."
+}

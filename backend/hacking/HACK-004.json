@@ -1,0 +1,10 @@
+{
+  "key": "HACK-004",
+  "summary": "SQL Injection Vulnerability Testing",
+  "description": "Test login forms and search boxes for SQL injection vulnerabilities",
+  "category": "Input Validation Testing",
+  "severity": "Critical",
+  "testing_type": "Vulnerability Assessment",
+  "target": "Database-connected forms",
+  "instructions": "Navigate to the target website and locate login forms, search boxes, and any forms that might interact with a database. Test for SQL injection using these payloads: 1) In username field: admin' OR '1'='1 and password: anything 2) In search boxes: test'; DROP TABLE users-- 3) In any numeric parameter: 1' UNION SELECT NULL-- 4) Error-based injection: ' OR 1=1-- 5) Time-based: '; WAITFOR DELAY '00:00:05'--. For each test, observe the response carefully. Look for: database error messages, unexpected login success, different page behavior, or extended response times. Take screenshots of any suspicious responses or error messages that reveal database information."
+}

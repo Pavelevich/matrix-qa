@@ -1,0 +1,10 @@
+{
+    "key": "HACK-068",
+    "summary": "Insecure OpenAPI/Swagger Spec Exposure",
+    "description": "Discover and analyze exposed OpenAPI/Swagger specification files to map the entire API surface, including potentially undocumented or sensitive endpoints.",
+    "category": "Information Disclosure",
+    "severity": "Medium",
+    "testing_type": "Reconnaissance",
+    "target": "API documentation endpoints",
+    "instructions": "1. Navigate to common paths for API spec files: `/swagger.json`, `/openapi.json`, `/api/docs`, `/swagger-ui.html`.\n2. If a spec file is found, load it into a tool like Swagger Editor or Postman.\n3. Systematically review every endpoint definition. Look for endpoints related to administration, user management, or data export that may not be linked in the main UI.\n4. This provides a complete roadmap for targeted API attacks. Document the URL of the spec and any sensitive endpoints discovered."
+}

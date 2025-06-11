@@ -1,0 +1,10 @@
+{
+    "key": "HACK-050",
+    "summary": "Source Map Reconnaissance",
+    "description": "Discover and download JavaScript source maps (`.js.map`) to de-minify code, revealing comments, original variable names, and application structure.",
+    "category": "Information Disclosure",
+    "severity": "Medium",
+    "testing_type": "Reconnaissance",
+    "target": "Minified JavaScript files",
+    "instructions": "1. In the browser 'Sources' tab, find the primary application JavaScript files (e.g., `app.[hash].js`).\n2. In the address bar, navigate to the same URL but append `.map` to it (e.g., `app.[hash].js.map`).\n3. If the browser downloads a JSON file, this is the source map.\n4. The source map contains the original, un-minified source code, which can be analyzed for logical flaws or secret keys."
+}

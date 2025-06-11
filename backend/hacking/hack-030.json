@@ -1,0 +1,10 @@
+{
+    "key": "HACK-030",
+    "summary": "API Rate Limiting Bypass",
+    "description": "Test API endpoints for weak or non-existent rate limiting, which could be abused for brute-force attacks or resource exhaustion.",
+    "category": "API Security",
+    "severity": "Medium",
+    "testing_type": "Vulnerability Assessment",
+    "target": "API endpoints for login, password reset, or resource creation",
+    "instructions": "1. Identify a sensitive API endpoint, such as `POST /api/login` or `POST /api/password-reset`.\n2. Open the browser console.\n3. Write a `for` loop to send the same request to the endpoint 100 times in rapid succession using `fetch`.\n4. Monitor the Network tab for the responses.\n5. If all or most requests return a 200 OK or a 401/403 Unauthorized status, and not a 429 Too Many Requests status, then rate limiting is not properly implemented. Document the endpoint and the successful burst of requests."
+}

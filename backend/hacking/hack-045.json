@@ -1,0 +1,10 @@
+{
+    "key": "HACK-045",
+    "summary": "Denial of Service via Resource Exhaustion",
+    "description": "Identify and repeatedly trigger a feature that consumes significant server resources (CPU, memory) to degrade or disable service.",
+    "category": "Denial of Service",
+    "severity": "Medium",
+    "testing_type": "Penetration Test",
+    "target": "Resource-intensive application features",
+    "instructions": "1. Find a feature that triggers a heavy back-end process, such as PDF generation, a complex search query with wildcards, or a data export.\n2. Using a simple `fetch` loop in the browser console, request this feature 10-20 times in parallel.\n3. Monitor the application's response time. If it slows significantly or becomes unresponsive, it is vulnerable to a logical DoS attack."
+}

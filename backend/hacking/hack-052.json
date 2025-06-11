@@ -1,0 +1,10 @@
+{
+    "key": "HACK-052",
+    "summary": "Dependency Confusion Probing",
+    "description": "Analyze loaded JavaScript libraries for names of internal packages and check if they can be claimed on public registries.",
+    "category": "Supply Chain Attack",
+    "severity": "Critical",
+    "testing_type": "Reconnaissance",
+    "target": "Application dependencies",
+    "instructions": "1. Analyze the application's `package.json` or `yarn.lock` file if exposed. If not, analyze the names of loaded JS files.\n2. Look for package names that sound internal or proprietary (e.g., `@mycompany-internal/auth-lib`).\n3. Navigate to public package registries (npmjs.com, pypi.org) and search for that exact package name.\n4. If the name is available, a dependency confusion attack is possible. Document the available package name."
+}

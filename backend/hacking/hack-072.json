@@ -1,0 +1,10 @@
+{
+    "key": "HACK-072",
+    "summary": "WAF Bypass via Obfuscation",
+    "description": "Evade Web Application Firewall detection by using character encoding, case variations, comments, and other obfuscation techniques.",
+    "category": "Input Validation Testing",
+    "severity": "High",
+    "testing_type": "Vulnerability Assessment",
+    "target": "Web Application Firewalls (WAF)",
+    "instructions": "1. Identify an input blocked by the WAF (e.g., `<script>alert(1)</script>`).\n2. Systematically apply obfuscation techniques. Try case variation: `<sCrIpT>`. Try alternative encodings: URL-encode certain characters. Try inserting comments: `<script>`.\n3. For SQLi, use different syntax: `union/**/select` or use alternative functions if the database supports them.\n4. Each time the WAF blocks a payload, try a different variation. If any payload successfully passes the WAF and executes, document the exact payload."
+}

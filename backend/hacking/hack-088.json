@@ -1,0 +1,10 @@
+{
+    "key": "HACK-088",
+    "summary": "Server-Sent Events (SSE) Hijacking",
+    "description": "Inspect Server-Sent Events streams for sensitive data and test if the connection can be hijacked or influenced by other vulnerabilities.",
+    "category": "Session Management",
+    "severity": "Medium",
+    "testing_type": "Security Assessment",
+    "target": "Applications using SSE / EventSource API",
+    "instructions": "1. In the Network tab, filter for EventStream connections.\n2. Inspect the data being pushed from the server to the client. Look for sensitive or user-specific information that should not be exposed.\n3. The SSE connection relies on the same-origin policy and cookies for authentication. Therefore, if you find another vulnerability like CSRF, you may be able to trigger actions that are then reflected in the victim's SSE stream."
+}

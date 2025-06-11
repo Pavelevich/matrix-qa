@@ -1,0 +1,10 @@
+{
+    "key": "HACK-036",
+    "summary": "Kubernetes API Server Exposure",
+    "description": "Probe for publicly exposed Kubernetes API servers, which can lead to full cluster compromise.",
+    "category": "Cloud Security Misconfiguration",
+    "severity": "Critical",
+    "testing_type": "Infrastructure Assessment",
+    "target": "Kubernetes clusters",
+    "instructions": "1. Navigate to common K8s API ports on the root domain and subdomains: `https://target.com:6443`, `https://k8s.target.com:8443`.\n2. A JSON response containing `\"kind\": \"Status\"` and `\"code\": 401` or `403` indicates an exposed API server.\n3. If anonymous authentication is enabled, a successful response will be returned. This is a critical vulnerability.\n4. Document the URL of the exposed API server and the status code received."
+}

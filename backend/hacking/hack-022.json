@@ -1,0 +1,10 @@
+{
+    "key": "HACK-022",
+    "summary": "Information Disclosure via `.git` Directory",
+    "description": "Check for a publicly exposed `.git` directory at the webroot, which allows downloading the application's full source code.",
+    "category": "Sensitive Data Exposure",
+    "severity": "High",
+    "testing_type": "Vulnerability Assessment",
+    "target": "Web server configuration",
+    "instructions": "1. Navigate directly to `/.git/config` relative to the website's root URL (e.g., `https://example.com/.git/config`).\n2. If the browser displays or downloads a file containing repository configuration data, the `.git` directory is exposed.\n3. The entire source code can then be reconstructed using tools like `git-dumper`. The initial finding is sufficient proof.\n4. Document the URL and take a screenshot of the exposed `config` file content."
+}

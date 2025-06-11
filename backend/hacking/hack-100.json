@@ -1,0 +1,10 @@
+{
+    "key": "HACK-100",
+    "summary": "Full Account Takeover Chain",
+    "description": "Combine multiple lower-severity vulnerabilities to achieve a critical impact, such as full account takeover.",
+    "category": "Chained Exploit",
+    "severity": "Critical",
+    "testing_type": "Penetration Test",
+    "target": "The entire application stack",
+    "instructions": "1. This directive requires combining other findings. Example Chain: Find an exposed API key in JavaScript (HACK-051). Use that key to access a user enumeration endpoint.\n2. Find a Self-XSS vulnerability in a profile page.\n3. Craft a social engineering lure to convince a victim user (like an admin) to paste your XSS payload into their own browser console.\n4. The executed XSS payload can then perform privileged actions on the admin's behalf, such as changing their password or creating a new admin account for you. Document the full chain of vulnerabilities that leads to the compromise."
+}

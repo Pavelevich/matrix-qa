@@ -1,0 +1,10 @@
+{
+  "key": "HACK-001",
+  "summary": "Information Gathering - Robots.txt and Configuration Files",
+  "description": "Analyze robots.txt file and check for exposed configuration files",
+  "category": "Information Gathering",
+  "severity": "Medium",
+  "testing_type": "Security Assessment",
+  "target": "Target website (configurable)",
+  "instructions": "Navigate to the target website (you can use https://example.com as default if no specific target is provided). First, check the robots.txt file by navigating to /robots.txt and analyze its contents. Look for any interesting directories or files mentioned. Then check for common exposed configuration files by trying to access: /.env, /config.php, /web.config, /.git/config, /wp-config.php, /database.yml. For each file you find, take a screenshot and note what information is exposed. Document any sensitive information like database credentials, API keys, or server paths that should not be publicly accessible."
+}

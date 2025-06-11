@@ -1,0 +1,10 @@
+{
+    "key": "HACK-034",
+    "summary": "SSRF to Steal Cloud Credentials",
+    "description": "Chain an SSRF vulnerability to actively steal temporary instance credentials from the cloud metadata service.",
+    "category": "Chained Exploit",
+    "severity": "Critical",
+    "testing_type": "Penetration Test",
+    "target": "SSRF-vulnerable endpoints on cloud-hosted applications",
+    "instructions": "1. Pre-requisite: Confirmed SSRF (HACK-010).\n2. Craft SSRF payload to target the metadata credentials endpoint. AWS: `http://169.254.169.254/latest/meta-data/iam/security-credentials/<IAM-ROLE-NAME>`.\n3. The response will contain `AccessKeyId`, `SecretAccessKey`, and `Token`.\n4. Immediately use these credentials with a cloud CLI from an external machine to test permissions. Document the full credentials leak."
+}

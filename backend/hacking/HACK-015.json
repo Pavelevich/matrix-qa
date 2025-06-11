@@ -1,0 +1,10 @@
+{
+  "key": "HACK-015",
+  "summary": "DOM-based XSS Vulnerability Testing",
+  "description": "Test for DOM-based Cross-Site Scripting vulnerabilities",
+  "category": "Client-Side Security Testing",
+  "severity": "High",
+  "testing_type": "DOM Vulnerability Assessment",
+  "target": "Client-side JavaScript",
+  "instructions": "Navigate to the target website and test for DOM-based XSS: 1) Look for URL parameters that are reflected in the page content without going to the server 2) Test with payloads in URL fragments (after #): #<script>alert('DOM XSS')</script> 3) Test URL parameters: ?param=<img src=x onerror=alert('DOM XSS')> 4) Open browser developer tools (F12) and examine JavaScript code in Sources tab 5) Look for dangerous JavaScript functions like document.write(), innerHTML, eval(), setTimeout() with user input 6) Test hash-based routing in single-page applications 7) Check for postMessage vulnerabilities by examining JavaScript event listeners. Use these test URLs: /page#<script>alert(1)</script>, /page?search=<img src=x onerror=alert(1)>. Monitor the browser console for any executed JavaScript and take screenshots of successful DOM XSS exploitation."
+}

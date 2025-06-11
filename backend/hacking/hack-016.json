@@ -1,0 +1,10 @@
+{
+    "key": "HACK-016",
+    "summary": "GraphQL API Introspection and Abuse",
+    "description": "Query the GraphQL schema to map the API surface, then craft abusive queries to exfiltrate data or cause a denial of service.",
+    "category": "API Security",
+    "severity": "High",
+    "testing_type": "Vulnerability Assessment",
+    "target": "GraphQL endpoints (e.g., /graphql, /api/graphql)",
+    "instructions": "1. Navigate to the application and look for GraphQL requests in the network tab. The endpoint is often `/graphql`.\n2. Using a browser-based GraphQL client extension or a `fetch` call, send a standard introspection query to the endpoint.\n3. If the server returns its full schema, introspection is enabled. Analyze the schema for sensitive data types or queries.\n4. Test for resource exhaustion by crafting a deeply nested query (e.g., query a user, their 100 friends, and each of their 100 posts). A slow response or error indicates a potential DoS vulnerability.\n5. Document any sensitive data discovered in the schema."
+}

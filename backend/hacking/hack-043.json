@@ -1,0 +1,10 @@
+{
+    "key": "HACK-043",
+    "summary": "Exploiting Weak JWT Secret",
+    "description": "If a JWT is used, attempt to crack its signature offline by testing a list of common, weak secret keys.",
+    "category": "Authentication Bypass",
+    "severity": "Critical",
+    "testing_type": "Penetration Test",
+    "target": "JWT-based session management",
+    "instructions": "1. Capture a valid JWT from a request.\n2. Use an offline tool (like hashcat or a simple script) to attempt to verify the JWT signature against a list of weak secrets ('secret', 'password', '123456', 'admin', 'jwt').\n3. If a valid signature is generated using a weak secret, you can now forge any JWT with any claims (e.g., `{\"user\":\"admin\"}`).\n4. Document the weak secret and the forged token."
+}

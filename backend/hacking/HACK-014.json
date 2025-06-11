@@ -1,0 +1,10 @@
+{
+  "key": "HACK-014",
+  "summary": "Clickjacking Vulnerability Testing",
+  "description": "Test for clickjacking vulnerabilities and frame protection",
+  "category": "Clickjacking Testing",
+  "severity": "Medium",
+  "testing_type": "UI Security Assessment",
+  "target": "Frame protection mechanisms",
+  "instructions": "Navigate to the target website and test for clickjacking vulnerabilities: 1) Check X-Frame-Options header in browser developer tools (F12) -> Network tab 2) Create a test iframe by opening browser console and executing: var iframe = document.createElement('iframe'); iframe.src = 'https://target-site.com'; iframe.style.width='100%'; iframe.style.height='500px'; document.body.appendChild(iframe); 3) Check if the site loads in the iframe 4) Test Content Security Policy frame-ancestors directive 5) Try embedding login pages in iframes to test if authentication forms are protected 6) Test different frame options like frame-src and child-src in CSP 7) Create a simple HTML page that attempts to frame the target site. Document whether the site can be embedded in frames, which could allow clickjacking attacks where attackers overlay invisible frames to trick users into clicking malicious links."
+}

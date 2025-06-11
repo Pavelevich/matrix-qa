@@ -1,0 +1,10 @@
+{
+    "key": "HACK-057",
+    "summary": "Web Cache Poisoning via Unkeyed Cookie",
+    "description": "Poison a web cache by sending a request with a custom cookie that alters the response, causing it to be served to other users.",
+    "category": "Information Disclosure",
+    "severity": "High",
+    "testing_type": "Penetration Test",
+    "target": "Web caches and CDNs",
+    "instructions": "1. Identify a cached page.\n2. Using the browser's cookie editor, add a new, non-standard cookie: `tracking-id=123`.\n3. Check if the presence of this cookie alters the response page in any way (e.g., a reflected value).\n4. If it does, and the page is still cached, then any user who receives the cached page will see your altered version. Document the cookie and the poisoned response."
+}

@@ -1,0 +1,10 @@
+{
+    "key": "HACK-076",
+    "summary": "Abusing Permissive CORS with Credentials",
+    "description": "Exploit CORS policies that allow credentials (`Access-Control-Allow-Credentials: true`) combined with a weak origin check, enabling PII exfiltration.",
+    "category": "Security Misconfiguration",
+    "severity": "Critical",
+    "testing_type": "Security Assessment",
+    "target": "CORS policy configuration",
+    "instructions": "1. Identify an API endpoint that requires authentication and responds with CORS headers.\n2. Check the response for `Access-Control-Allow-Credentials: true`.\n3. Check the `Access-Control-Allow-Origin` header. If it reflects a user-controllable value (e.g., from the `Origin` request header) or uses a weak regex, it's vulnerable.\n4. From a malicious page, use `fetch` with `credentials: 'include'` to make a request. The browser will now send cookies, and your malicious page will be able to read the response containing the victim's private data."
+}

@@ -1,0 +1,10 @@
+{
+    "key": "HACK-073",
+    "summary": "CSRF Token Fixation / Replay",
+    "description": "Test if the server fails to issue a new CSRF token after login, allowing an attacker to fixate a token in a user's browser and reuse it.",
+    "category": "Session Management",
+    "severity": "High",
+    "testing_type": "Security Assessment",
+    "target": "CSRF protection mechanism",
+    "instructions": "1. Navigate to the login page as an unauthenticated user. If a CSRF token is already present in a form, capture its value.\n2. Log in to the application.\n3. After logging in, check the CSRF token on a protected form again. If it's the *same token* as the one from before you logged in, the application is vulnerable to token fixation.\n4. An attacker can feed a valid but unauthenticated token to a victim's browser, and after the victim logs in, the attacker can use that known token to perform actions."
+}

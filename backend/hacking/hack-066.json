@@ -1,0 +1,10 @@
+{
+    "key": "HACK-066",
+    "summary": "Exploiting Post-Message Vulnerabilities",
+    "description": "Send malicious messages to a window's message event listener to trigger XSS or data leakage if the origin is not properly validated.",
+    "category": "Client-Side Vulnerability",
+    "severity": "High",
+    "testing_type": "Vulnerability Assessment",
+    "target": "JavaScript using `window.addEventListener('message', ...)`",
+    "instructions": "1. Inspect the client-side JavaScript for `addEventListener('message', ...)`.\n2. Analyze the event handler. If it processes the `event.data` without a strict check on `event.origin`, it is vulnerable.\n3. From the browser console (simulating a malicious external window), craft a postMessage call to the target window: `targetWindow.postMessage('{\"type\":\"login\",\"data\":\"<img src=x onerror=alert(1)>\"}', '*')`.\n4. If the payload executes, you can exploit any user who opens your malicious site in another tab. Document the vulnerable event listener and the malicious payload."
+}

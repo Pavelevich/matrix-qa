@@ -1,0 +1,10 @@
+{
+    "key": "HACK-070",
+    "summary": "Chaining XSS to Steal and Use CSRF Tokens",
+    "description": "Use a stored or reflected XSS vulnerability to read a page containing a valid CSRF token, then use that token to perform a privileged action on behalf of the user.",
+    "category": "Chained Exploit",
+    "severity": "Critical",
+    "testing_type": "Penetration Test",
+    "target": "Forms protected by anti-CSRF tokens",
+    "instructions": "1. Pre-requisite: An XSS vulnerability must be confirmed.\n2. Craft an XSS payload that uses `fetch()` to request a page that contains a form with a CSRF token (e.g., the 'change password' page).\n3. The payload must then parse the response text to extract the CSRF token value.\n4. The final part of the payload uses another `fetch()` call to submit the sensitive form, including the stolen CSRF token.\n5. If the action succeeds, you have bypassed CSRF protection. Document the full XSS payload."
+}

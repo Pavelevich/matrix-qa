@@ -1,0 +1,10 @@
+{
+    "key": "HACK-078",
+    "summary": "Template Injection (Client-Side)",
+    "description": "Inject template expressions into client-side templates (e.g., AngularJS, Vue) that are dynamically rendered, leading to XSS.",
+    "category": "Client-Side Vulnerability",
+    "severity": "High",
+    "testing_type": "Vulnerability Assessment",
+    "target": "Client-side templating engines",
+    "instructions": "1. Fingerprint the client-side framework being used.\n2. Identify inputs that are rendered into the page via the templating engine.\n3. Instead of an XSS payload, inject a mathematical operation in the template syntax. For AngularJS: `{{7*7}}`. For Vue: `{{constructor.constructor('alert(1)')()}}`.\n4. If the page renders '49' or an alert box appears, the application is vulnerable to client-side template injection. Document the payload and injection point."
+}

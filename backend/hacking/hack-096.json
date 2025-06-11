@@ -1,0 +1,10 @@
+{
+    "key": "HACK-096",
+    "summary": "Dirty COW (Copy-on-Write) Privilege Escalation",
+    "description": "If a shell is gained on a Linux server, check for an unpatched kernel vulnerable to Dirty COW (CVE-2016-5195) to escalate from a low-privilege user to root.",
+    "category": "Privilege Escalation",
+    "severity": "Critical",
+    "testing_type": "Post-Exploitation",
+    "target": "Linux Kernels before 4.8.3",
+    "instructions": "1. Pre-requisite: A web shell or other RCE on a Linux host.\n2. From the shell, run `uname -a` to get the kernel version.\n3. If the version is vulnerable, download and run a pre-compiled Dirty COW exploit.\n4. The exploit works by creating a copy of a root-owned, read-only file (like `/etc/passwd`) and then winning a race condition to write to it before the copy-on-write operation completes.\n5. Success means you can overwrite `/etc/passwd` to set a password for the root user, achieving full system compromise."
+}

@@ -1,0 +1,10 @@
+{
+    "key": "HACK-098",
+    "summary": "HTTP Host Header Forgery for Internal Access",
+    "description": "Forge the Host header to access internal-only applications or vhosts that are hosted on the same IP as the public web server.",
+    "category": "Access Control Bypass",
+    "severity": "Medium",
+    "testing_type": "Infrastructure Assessment",
+    "target": "Web server virtual host configuration",
+    "instructions": "1. Send a request to the web server's IP address directly.\n2. In the `Host` header, specify internal-sounding names like `localhost`, `internal-api`, `dev-server`, `admin-panel`.\n3. If the server responds with a different page than the default public site, you have successfully accessed an internal virtual host.\n4. This can expose administrative interfaces or applications not intended for public view. Document the host header and the resulting page."
+}

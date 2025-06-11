@@ -1,0 +1,10 @@
+{
+  "key": "HACK-007",
+  "summary": "SSL/TLS Configuration Testing",
+  "description": "Verify SSL certificate validity and HTTPS implementation",
+  "category": "SSL/TLS Configuration",
+  "severity": "High",
+  "testing_type": "Security Assessment",
+  "target": "HTTPS configuration",
+  "instructions": "Navigate to the target website and verify SSL/TLS security: 1) Check SSL certificate - click on the padlock icon in the browser address bar and examine certificate details 2) Test HTTPS redirection - if the site uses HTTP, try accessing it via HTTPS and vice versa 3) Mixed content issues - if on HTTPS, open developer tools and check Console for mixed content warnings 4) SSL Labs test - navigate to https://www.ssllabs.com/ssltest/ and test the target domain 5) Test for weak ciphers by examining the certificate details 6) Check for HTTP Strict Transport Security (HSTS) in response headers. Document certificate validity, expiration dates, issuer information, and any security warnings. Take screenshots of certificate details and any SSL-related errors or warnings."
+}

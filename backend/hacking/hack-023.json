@@ -1,0 +1,10 @@
+{
+    "key": "HACK-023",
+    "summary": "Subdomain Takeover",
+    "description": "Identify and take over subdomains that have a CNAME DNS record pointing to a de-provisioned cloud service.",
+    "category": "Security Misconfiguration",
+    "severity": "High",
+    "testing_type": "Security Assessment",
+    "target": "DNS configuration",
+    "instructions": "1. This test requires an external online tool. Navigate to a DNS lookup tool (like `toolbox.googleapps.com/apps/dig/` or `mxtoolbox.com`).\n2. Enumerate potential subdomains of the target (e.g., `blog.target.com`, `api.target.com`, `dev.target.com`).\n3. For each subdomain, perform a CNAME lookup.\n4. If a CNAME record points to a cloud service (e.g., `*.s3.amazonaws.com`, `*.herokuapp.com`, `*.github.io`) and navigating to that subdomain in the browser gives a provider-specific 'not found' error (e.g., 'NoSuchBucket'), it is likely vulnerable.\n5. To confirm, you would register the corresponding resource at the cloud provider. For this test, documenting the dangling CNAME record and the error page is sufficient."
+}

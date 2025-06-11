@@ -1,0 +1,10 @@
+{
+  "key": "HACK-002",
+  "summary": "Technology Stack and Version Identification",
+  "description": "Identify technology stack, versions, and administrative directories",
+  "category": "Information Gathering",
+  "severity": "Low",
+  "testing_type": "Reconnaissance",
+  "target": "Target website (configurable)",
+  "instructions": "Navigate to the target website and perform technology identification. Check the page source by right-clicking and selecting 'View Page Source'. Look for technology indicators like: framework signatures (React, Angular, jQuery versions), server headers, CMS signatures (WordPress, Drupal), and meta tags revealing technology stack. Then test for common administrative directories by navigating to: /admin, /administrator, /dashboard, /panel, /manage, /control, /cms, /wp-admin. For each accessible directory, take a screenshot and document what you find. Also check for backup files by trying: /backup, /old, /test, /dev, /staging paths."
+}

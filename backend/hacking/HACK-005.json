@@ -1,0 +1,10 @@
+{
+  "key": "HACK-005",
+  "summary": "Authentication and Session Management Testing",
+  "description": "Test login functionality for security weaknesses",
+  "category": "Authentication & Session Management",
+  "severity": "High",
+  "testing_type": "Security Assessment",
+  "target": "Authentication systems",
+  "instructions": "Navigate to the target website's login page. Test the following authentication security aspects: 1) Password policy - try creating accounts with weak passwords like '123', 'password', 'admin' 2) Account lockout - attempt 10+ failed login attempts with username 'admin' and random passwords 3) Common credentials - try combinations like admin/admin, admin/password, user/user, test/test 4) Session testing - after successful login, check if session cookies are secure by examining browser developer tools (F12) -> Application -> Cookies. 5) Password reset - if available, test the password reset functionality for information disclosure. 6) Brute force protection - test if there are any rate limiting mechanisms. Document any successful logins, weak password acceptance, or security misconfigurations."
+}

@@ -1,0 +1,10 @@
+{
+    "key": "HACK-010",
+    "summary": "Server-Side Request Forgery (SSRF) Probe",
+    "description": "Force the server to make requests on your behalf to internal network resources, bypassing firewall controls.",
+    "category": "Access Control Bypass",
+    "severity": "Critical",
+    "testing_type": "Penetration Test",
+    "target": "Any feature that processes URLs or IP addresses",
+    "instructions": "1. Using the browser's network inspector, identify all GET or POST requests where a parameter contains a full URL (e.g., `?image_url=...`, `&redirect=...`).\n2. Re-issue the request, replacing the target URL with an external endpoint you control (e.g., a Burp Collaborator or Interact.sh URL) to confirm outbound connectivity.\n3. If confirmed, begin internal probing. Systematically substitute the URL with `http://127.0.0.1`, `http://localhost`, and common internal service ports like `http://127.0.0.1:8080`.\n4. Escalate to cloud metadata services. Use the payload `http://169.254.169.254/latest/meta-data/`. A 200 OK response containing instance data is a critical finding.\n5. Document the vulnerable parameter and screenshot any internal service banners or metadata received."
+}

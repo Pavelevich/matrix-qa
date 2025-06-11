@@ -1,0 +1,10 @@
+{
+    "key": "HACK-095",
+    "summary": "PHP Type Juggling / Loose Comparison Bypass",
+    "description": "Bypass authentication or other checks that use loose comparisons (==) instead of strict comparisons (===) in PHP.",
+    "category": "Authentication Bypass",
+    "severity": "High",
+    "testing_type": "Vulnerability Assessment",
+    "target": "PHP applications",
+    "instructions": "1. Find a check that compares user input to a value, especially a hashed password.\n2. If the check is `if ($password == $hash)`, it may be vulnerable. PHP's loose comparison can evaluate certain strings as true. For example, `\"0e12345\" == \"0e54321\"` evaluates to true because PHP treats them as numbers in scientific notation (0^12345 == 0^54321).\n3. If a hash starts with `0e`, try submitting a password that also starts with `0e` and is followed only by digits. If you get in, the check is vulnerable."
+}

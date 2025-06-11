@@ -1,0 +1,10 @@
+{
+  "key": "HACK-008",
+  "summary": "Error Handling and Information Disclosure Testing",
+  "description": "Test for verbose error messages and information disclosure",
+  "category": "Error Handling & Information Disclosure",
+  "severity": "Medium",
+  "testing_type": "Information Disclosure Assessment",
+  "target": "Error pages and responses",
+  "instructions": "Navigate to the target website and perform the following tests to identify information disclosure: 1) Access non-existent pages - try URLs like /nonexistent, /admin/secret, /database/admin to trigger 404 errors 2) Malformed requests - add invalid parameters like ?param=../../etc/passwd 3) SQL errors - try URLs with single quotes like /page.php?id=1' 4) View page source - right-click and 'View Page Source' to look for commented-out sensitive information, API keys, or debug information 5) Check for stack traces by triggering application errors 6) Test different file extensions like .php~, .bak, .old on existing pages 7) Look for development/debug modes by adding parameters like ?debug=1, ?test=1. Document any error messages that reveal server paths, database information, version numbers, or internal application structure."
+}

@@ -1,0 +1,10 @@
+{
+    "key": "HACK-031",
+    "summary": "Cloud Storage Misconfiguration Probe",
+    "description": "Identify and exploit public cloud storage buckets (S3, GCS) linked from the application to list, read, or write files.",
+    "category": "Cloud Security Misconfiguration",
+    "severity": "Critical",
+    "testing_type": "Infrastructure Assessment",
+    "target": "Application assets hosted on cloud storage",
+    "instructions": "1. Using the browser's network inspector, identify URLs of assets served from cloud storage (e.g., s3.amazonaws.com, storage.googleapis.com).\n2. Isolate the bucket name from the URL.\n3. Attempt to list the bucket's contents by navigating directly to the root bucket URL or using an external tool to send an unsigned request (e.g., `aws s3 ls s3://<bucket-name> --no-sign-request`).\n4. If listing is possible, attempt to write a file. If successful, document the permissions and screenshot the proof."
+}

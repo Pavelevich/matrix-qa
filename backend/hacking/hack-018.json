@@ -1,0 +1,10 @@
+{
+    "key": "HACK-018",
+    "summary": "OAuth 2.0 Insecure `redirect_uri`",
+    "description": "Exploit weak validation of the `redirect_uri` parameter in an OAuth flow to steal authorization codes.",
+    "category": "Authentication Bypass",
+    "severity": "Critical",
+    "testing_type": "Penetration Test",
+    "target": "OAuth 2.0 authentication flows",
+    "instructions": "1. Start the OAuth login flow and use the network inspector to capture the first request to the authorization server.\n2. Identify the `redirect_uri` parameter in the URL.\n3. Attempt to modify the `redirect_uri` to point to a domain you control, but one that looks similar to the original (e.g., `https://legit-domain.com.attacker.com` or `https://attacker.com/legit-domain.com`).\n4. If the authorization server redirects the user (with the auth code in the URL) to your malicious domain after login, the validation is flawed.\n5. Document the crafted authorization URL that demonstrates the bypass."
+}

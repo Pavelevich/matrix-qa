@@ -1,0 +1,10 @@
+{
+    "key": "HACK-038",
+    "summary": "Mass Assignment / Parameter Pollution",
+    "description": "Bypass authorization or modify unintended object properties by submitting unexpected parameters during API calls.",
+    "category": "Business Logic Bypass",
+    "severity": "High",
+    "testing_type": "Vulnerability Assessment",
+    "target": "API endpoints for user registration or profile updates",
+    "instructions": "1. Identify an API endpoint for creating or updating an object (e.g., `POST /api/register`).\n2. Replay the request using `fetch`, but add a privileged parameter: `{\"username\":\"test\", \"isAdmin\":true}`.\n3. Check if your user has been elevated to an admin. Document any successful privilege escalation."
+}

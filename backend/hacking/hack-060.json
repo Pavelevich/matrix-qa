@@ -1,0 +1,10 @@
+{
+    "key": "HACK-060",
+    "summary": "HTTP Response Splitting",
+    "description": "Inject CR/LF characters into a reflected parameter to split the HTTP response, allowing for header manipulation and cross-site scripting.",
+    "category": "Client-Side Vulnerability",
+    "severity": "High",
+    "testing_type": "Penetration Test",
+    "target": "URL parameters that are reflected in response headers",
+    "instructions": "1. Find a URL parameter that is reflected in a response header (e.g., a redirect URL in the `Location` header).\n2. Inject URL-encoded CR/LF characters (`%0d%0a`) followed by custom headers and HTML body. Example: `?redirect=%0d%0aContent-Type: text/html%0d%0a%0d%0a<script>alert(1)</script>`\n3. If the browser processes the injected headers and executes the script, the application is vulnerable. This can be used to perform XSS attacks that bypass most filters."
+}

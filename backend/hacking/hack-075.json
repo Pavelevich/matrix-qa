@@ -1,0 +1,10 @@
+{
+    "key": "HACK-075",
+    "summary": "Host Header Injection to Poison Cache or Reset Links",
+    "description": "Manipulate the Host header to cause the application to generate URLs pointing to an attacker-controlled domain.",
+    "category": "Web Cache Poisoning",
+    "severity": "High",
+    "testing_type": "Penetration Test",
+    "target": "Application logic that uses the Host header",
+    "instructions": "1. Using a browser extension or intercepting proxy, send a request to the application but modify the `Host` header to a domain you control.\n2. Look for any URLs in the response that have been generated using your malicious host. This is especially critical in password reset emails.\n3. Also test for cache poisoning: if the response is cached, subsequent users may be served a version of the page with links pointing to your malicious site. Document the request with the modified header and the poisoned response link."
+}

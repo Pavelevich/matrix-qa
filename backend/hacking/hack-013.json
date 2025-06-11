@@ -1,0 +1,10 @@
+{
+    "key": "HACK-013",
+    "summary": "Business Logic Flaw - Password Reset Poisoning",
+    "description": "Manipulate the Host header during a password reset to generate a link that points to a server you control, capturing the reset token.",
+    "category": "Business Logic Bypass",
+    "severity": "High",
+    "testing_type": "Penetration Test",
+    "target": "Password reset functionality",
+    "instructions": "1. Navigate to the password reset page.\n2. Open developer tools and enable request interception or replay for the network tab.\n3. Enter a target username/email and submit the form.\n4. Find the submitted request (e.g., a POST to `/reset-password`). Replay this request, but modify the `Host` header to a domain you control.\n5. Check the email inbox for the target user. If the reset link contains your malicious domain, the application is vulnerable. Screenshot the poisoned link."
+}

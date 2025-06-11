@@ -1,0 +1,10 @@
+{
+  "key": "HACK-013",
+  "summary": "CORS Configuration Testing",
+  "description": "Test Cross-Origin Resource Sharing (CORS) configuration",
+  "category": "CORS Security Testing",
+  "severity": "Medium",
+  "testing_type": "Configuration Assessment",
+  "target": "CORS headers and policies",
+  "instructions": "Navigate to the target website and test CORS configuration: 1) Open browser developer tools (F12) and go to Console 2) Test CORS with different origins using: fetch('https://target-site.com/api/data', {method: 'GET', mode: 'cors', credentials: 'include'}) 3) Check CORS headers in Network tab - look for Access-Control-Allow-Origin, Access-Control-Allow-Methods, Access-Control-Allow-Headers 4) Test wildcard CORS by checking if Access-Control-Allow-Origin is set to * 5) Test credential inclusion with CORS requests 6) Try to make requests from different origins (use online CORS testing tools if needed) 7) Check for preflight request handling with OPTIONS method. Document any overly permissive CORS configurations that could allow unauthorized cross-origin requests, especially configurations that allow any origin (*) with credentials."
+}

@@ -1,0 +1,10 @@
+{
+    "key": "HACK-094",
+    "summary": "XML-RPC Pingback Exploitation",
+    "description": "Exploit the XML-RPC functionality in content management systems (like WordPress) to perform port scanning and SSRF against internal and external networks.",
+    "category": "Server-Side Request Forgery",
+    "severity": "Medium",
+    "testing_type": "Vulnerability Assessment",
+    "target": "XML-RPC endpoints (e.g., /xmlrpc.php)",
+    "instructions": "1. Find the XML-RPC endpoint.\n2. Craft a POST request using the `pingback.ping` method. Set the target URI in the pingback to an internal host/port you want to scan: `http://127.0.0.1:22`.\n3. The error message returned by the server will indicate if the port is open or closed, allowing you to map the internal network.\n4. Document that XML-RPC can be abused for internal network reconnaissance."
+}

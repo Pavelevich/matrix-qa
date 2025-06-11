@@ -1,0 +1,10 @@
+{
+    "key": "HACK-092",
+    "summary": "Deserialization RCE in Python (Pickle)",
+    "description": "Exploit applications that unsafely deserialize Python Pickle objects from user input, leading to RCE.",
+    "category": "Remote Code Execution",
+    "severity": "Critical",
+    "testing_type": "Penetration Test",
+    "target": "Python applications using Pickle serialization",
+    "instructions": "1. Find an input (often a Base64 encoded cookie or parameter) that is likely a serialized Pickle object.\n2. Use a Python script to craft a malicious Pickle payload that executes a command (e.g., a reverse shell or a simple `os.system('id')`).\n3. Base64-encode this payload and submit it in the identified parameter.\n4. If the command executes, you have achieved RCE. This is a blind attack, so you'll need to use out-of-band methods (like a reverse shell or DNS query) to confirm success."
+}

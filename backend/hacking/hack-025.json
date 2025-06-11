@@ -1,0 +1,10 @@
+{
+    "key": "HACK-025",
+    "summary": "DOM-based Cross-Site Scripting (XSS)",
+    "description": "Identify XSS vulnerabilities that occur purely on the client-side when JavaScript writes data from a DOM source to the page without sanitization.",
+    "category": "Client-Side Vulnerability",
+    "severity": "High",
+    "testing_type": "Vulnerability Assessment",
+    "target": "Client-side JavaScript using sources like `location.hash`",
+    "instructions": "1. Manually inspect the page's JavaScript files for code that reads from `location.hash`, `location.search`, or `document.referrer`.\n2. Look for sinks where this data is written back to the DOM, such as `.innerHTML`, `document.write()`, or `eval()`.\n3. Once a potential source-to-sink path is found, craft a payload in the URL fragment. Example: `https://example.com/page#<img src=x onerror=alert('DOM_XSS')>`.\n4. Navigate to the crafted URL. If an alert box appears, the vulnerability is confirmed.\n5. Document the full URL with the payload and a screenshot of the executed script."
+}

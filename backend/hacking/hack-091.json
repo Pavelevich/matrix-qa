@@ -1,0 +1,10 @@
+{
+    "key": "HACK-091",
+    "summary": "Ruby on Rails Dynamic Render RCE",
+    "description": "Exploit unsafe dynamic render calls in Ruby on Rails applications to achieve Remote Code Execution.",
+    "category": "Remote Code Execution",
+    "severity": "Critical",
+    "testing_type": "Penetration Test",
+    "target": "Ruby on Rails applications",
+    "instructions": "1. Find a parameter that appears to be rendered by the server.\n2. Attempt to inject a payload that uses ERB (Embedded Ruby) syntax. Start with a simple probe: `<%= 7*7 %>`.\n3. If the page renders '49', the application is likely vulnerable.\n4. Escalate to an RCE payload: `<%= system('id') %>`. A successful response containing the server user's ID confirms RCE."
+}

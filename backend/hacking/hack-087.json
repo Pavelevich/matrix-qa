@@ -1,0 +1,10 @@
+{
+    "key": "HACK-087",
+    "summary": "HTTP/3 & QUIC Protocol Abuse",
+    "description": "Test for implementation-specific flaws in the newer HTTP/3 over QUIC protocol, such as request smuggling or amplification attacks.",
+    "category": "Protocol Exploit",
+    "severity": "High",
+    "testing_type": "Vulnerability Assessment",
+    "target": "Servers supporting HTTP/3",
+    "instructions": "1. Use browser developer tools to confirm if the application is communicating over HTTP/3 (h3).\n2. This is an emerging attack surface. Use specialized tools designed for QUIC protocol analysis to test for vulnerabilities like stream confusion or amplification, where a small request can trigger a large response.\n3. For now, documenting that the server uses HTTP/3 and is a potential target for these newer, less-understood attacks is a valid finding."
+}

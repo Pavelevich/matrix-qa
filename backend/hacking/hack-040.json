@@ -1,0 +1,10 @@
+{
+    "key": "HACK-040",
+    "summary": "NoSQL Injection (Operator-based)",
+    "description": "Exploit NoSQL databases by injecting query operators instead of data, bypassing authentication.",
+    "category": "Input Validation Testing",
+    "severity": "Critical",
+    "testing_type": "Vulnerability Assessment",
+    "target": "Login forms backed by MongoDB/NoSQL",
+    "instructions": "1. Intercept a login request. Instead of a string, inject a NoSQL operator in the password field: `{\"username\":\"admin\", \"password\":{\"$ne\":null}}`.\n2. If you are logged in as the admin, the endpoint is vulnerable. Document the JSON payload that bypassed authentication."
+}

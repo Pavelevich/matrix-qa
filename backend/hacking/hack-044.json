@@ -1,0 +1,10 @@
+{
+    "key": "HACK-044",
+    "summary": "Session Puzzling / Replay Attack",
+    "description": "Confuse application state by replaying session identifiers across different authentication contexts.",
+    "category": "Session Management",
+    "severity": "Medium",
+    "testing_type": "Security Assessment",
+    "target": "Session management logic",
+    "instructions": "1. Log in as User A and copy the session cookie value.\n2. Log out. Log in as User B.\n3. Using the browser's cookie editor, replace User B's session cookie with User A's copied cookie.\n4. Refresh the page. If you are now logged in as User A, or if the application shows a confused state mixing data from both users, it is vulnerable."
+}

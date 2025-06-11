@@ -1,0 +1,10 @@
+{
+    "key": "HACK-048",
+    "summary": "gRPC-Web API Reconnaissance",
+    "description": "Fingerprint and probe gRPC-Web endpoints to understand their structure and test for misconfigurations.",
+    "category": "API Security",
+    "severity": "Low",
+    "testing_type": "Reconnaissance",
+    "target": "gRPC-Web endpoints",
+    "instructions": "1. In the Network tab, look for requests with a content-type of `application/grpc-web`.\n2. Note the endpoint URL. gRPC-Web is not human-readable directly in the browser.\n3. Use a specialized browser extension (like gRPC-Web Developer Tools) to decode the binary messages.\n4. Attempt to identify the services and methods being called. This reconnaissance is the first step to more advanced gRPC attacks."
+}

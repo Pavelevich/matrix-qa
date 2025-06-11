@@ -1,0 +1,10 @@
+{
+  "key": "HACK-006",
+  "summary": "Security Headers Analysis",
+  "description": "Check for presence and configuration of security headers",
+  "category": "Security Headers Analysis",
+  "severity": "Medium",
+  "testing_type": "Configuration Assessment",
+  "target": "HTTP response headers",
+  "instructions": "Navigate to the target website and open browser developer tools (F12). Go to the Network tab and refresh the page. Click on the main document request to view response headers. Check for the presence and proper configuration of these security headers: 1) Content-Security-Policy (CSP) 2) X-Frame-Options 3) X-Content-Type-Options 4) Strict-Transport-Security (HSTS) 5) X-XSS-Protection 6) Referrer-Policy 7) Permissions-Policy. For each header, document whether it's present, missing, or misconfigured. Take screenshots of the headers section. Test X-Frame-Options by trying to embed the site in an iframe using the browser console: var iframe = document.createElement('iframe'); iframe.src = 'current_site_url'; document.body.appendChild(iframe);"
+}

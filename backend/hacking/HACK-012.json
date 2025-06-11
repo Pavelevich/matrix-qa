@@ -1,0 +1,10 @@
+{
+  "key": "HACK-012",
+  "summary": "API Security Testing",
+  "description": "Test REST APIs and AJAX endpoints for security vulnerabilities",
+  "category": "API Security Testing",
+  "severity": "High",
+  "testing_type": "API Vulnerability Assessment",
+  "target": "API endpoints",
+  "instructions": "Navigate to the target website and open browser developer tools (F12). Go to the Network tab and interact with the website to identify API calls. For each API endpoint discovered: 1) Test authentication - try accessing endpoints without authentication tokens 2) Test authorization - modify user IDs or resource IDs to access other users' data 3) Test HTTP methods - try different methods (GET, POST, PUT, DELETE) on the same endpoint 4) Test input validation - send malformed JSON, SQL injection payloads, and XSS payloads in API parameters 5) Test rate limiting - make rapid requests to check for rate limiting 6) Check for sensitive data exposure in API responses 7) Test for CORS misconfigurations. Use the browser console to make API requests: fetch('/api/endpoint', {method: 'GET', headers: {'Content-Type': 'application/json'}}). Document any successful unauthorized access, data exposure, or input validation failures in API endpoints."
+}

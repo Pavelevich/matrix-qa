@@ -1,0 +1,10 @@
+{
+  "key": "HACK-003",
+  "summary": "Cross-Site Scripting (XSS) Vulnerability Testing",
+  "description": "Test forms and input fields for XSS vulnerabilities",
+  "category": "Input Validation Testing",
+  "severity": "High",
+  "testing_type": "Vulnerability Assessment",
+  "target": "Target website forms",
+  "instructions": "Navigate to the target website and locate all forms (login, contact, search, comment forms). For each form found, test for XSS vulnerabilities using these payloads one by one: 1) <script>alert('XSS')</script> 2) <img src=x onerror=alert('XSS')> 3) javascript:alert('XSS') 4) <svg onload=alert('XSS')>. Submit each payload in different input fields and observe the response. If any payload executes (shows an alert box), take a screenshot immediately. Also test URL parameters by adding ?test=<script>alert('XSS')</script> to the current URL. Document each successful XSS finding with the exact payload and location where it worked."
+}

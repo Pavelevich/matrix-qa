@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' ws: wss: http://localhost:8000;">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <title>Matrix QA Test Runner</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/css/matrix-style.css">
+    <style>
+        #matrix-validation, .matrix-validation {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            position: absolute !important;
+            z-index: -9999 !important;
+            height: 0 !important;
+            width: 0 !important;
+            overflow: hidden !important;
+            pointer-events: none !important;
+        }
+    </style>
+    <script>
+
+        (function() {
+            document.addEventListener('DOMContentLoaded', function() {
+                var validationElement = document.getElementById('matrix-validation');
+                if (validationElement) {
+                    validationElement.style.display = 'none';
+                    validationElement.style.visibility = 'hidden';
+                    validationElement.style.opacity = '0';
+                    validationElement.style.position = 'absolute';
+                    validationElement.style.zIndex = '-9999';
+                    validationElement.style.height = '0';
+                    validationElement.style.width = '0';
+                    validationElement.style.overflow = 'hidden';
+                    validationElement.style.pointerEvents = 'none';
+                }
+            });
+        })();
+    </script>
+</head>
+<body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
+<script>
+
+    (function() {
+
+        function preventValidationPopup() {
+            var element = document.getElementById('matrix-validation');
+            if (element) {
+                element.style.display = 'none';
+                element.style.visibility = 'hidden';
+                element.style.opacity = '0';
+                element.style.position = 'absolute';
+                element.style.zIndex = '-9999';
+                element.style.height = '0';
+                element.style.width = '0';
+                element.style.overflow = 'hidden';
+                element.parentNode.style.position = 'relative';
+            }
+        }
+
+        preventValidationPopup();
+
+        setTimeout(preventValidationPopup, 0);
+        setTimeout(preventValidationPopup, 50);
+        setTimeout(preventValidationPopup, 100);
+
+        document.addEventListener('readystatechange', preventValidationPopup);
+
+        if (window.MutationObserver) {
+            var observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.type === 'attributes' || mutation.type === 'childList') {
+                        preventValidationPopup();
+                    }
+                });
+            });
+
+            document.addEventListener('DOMContentLoaded', function() {
+                observer.observe(document.body, {
+                    attributes: true,
+                    childList: true,
+                    subtree: true
+                });
+            });
+        }
+    })();
+</script>
+<canvas id="matrix-canvas"></canvas>
+
+<div class="container-fluid">
+    <div id="login-container" class="card">
+        <div class="card-body">
+            <div class="matrix-logo">MATRIX</div>
+            <div class="matrix-effect">Access Authorization Required</div>
+            <form id="login-form">
+                <div class="mb-3">
+                    <label for="username" class="form-label">USERNAME</label>
+                    <input type="text" class="form-control" id="username" placeholder="Enter username" required
+                           autocomplete="off">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">PASSWORD</label>
+                    <input type="password" class="form-control" id="password" placeholder="Enter password" required
+                           autocomplete="off">
+                </div>
+                <div id="login-error" class="error-message mb-3" style="display: none;">
+                    AUTHENTICATION FAILED: INVALID CREDENTIALS
+                </div>
+                <button type="submit" class="btn btn-primary w-100">AUTHENTICATE</button>
+            </form>
+            <div class="access-text mt-3">[ SECURE CONNECTION ESTABLISHED ]</div>
+        </div>
+    </div>
+
+    <div id="app-container" style="display: none;">
+        <div class="row g-0">
+            <div class="col-md-9 live-view-container">
+                <div class="live-view">
+                    <div id="live-view-overlay" class="live-view-overlay">
+                        <h4>INITIALIZING SYSTEM...</h4>
+                    </div>
+                    <div id="recording-indicator" class="recording-indicator">RECORDING</div>
+                    <img id="live-screenshot"
+                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+                         alt="Live view">
+                </div>
+            </div>
+
+            <div class="col-md-3 control-panel">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">MATRIX CONTROL</h5>
+                        <div>
+                            <span id="connection-status" class="badge bg-secondary">DISCONNECTED</span>
+                            <span id="session-timer" class="badge bg-info me-2">60:00</span>
+                            <button id="disconnect-btn" class="btn btn-sm btn-outline-danger ms-2">EXIT</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form id="test-form">
+                            <div class="mb-3 position-relative">
+                                <label for="test-instructions" class="form-label">SYSTEM INSTRUCTIONS</label>
+                                <textarea class="form-control" id="test-instructions" rows="3"
+                                          placeholder="Enter instructions for the system to execute..."
+                                          required></textarea>
+                                <div id="matrix-validation" class="matrix-validation"
+                                     style="display:none !important; visibility:hidden !important; opacity:0 !important; position:absolute !important; z-index:-9999 !important; height:0 !important; width:0 !important; overflow:hidden !important; pointer-events:none !important;">
+                                    PLEASE WRITE INSTRUCTIONS TO EXECUTE
+                                </div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <button type="button" id="history-btn" class="matrix-history-btn-full">EXECUTION
+                                    HISTORY
+                                </button>
+                            </div>
+                            <div class="form-group mb-3">
+                                <button id="jiraBtn" type="button" class="matrix-jira-btn w-100">
+                                    <span class="jira-btn-icon">🎯</span>
+                                    <span class="jira-btn-text">JIRA TICKETS</span>
+                                    <span class="jira-btn-glow"></span>
+                                </button>
+                            </div>
+                           <div class="form-group mb-3">
+                                    <button id="hackingBtn" type="button" class="matrix-hacking-btn w-100">
+                                        <span class="hacking-btn-icon">🛡️</span>
+                                        <span class="hacking-btn-text">HACKING TESTS</span>
+                                        <span class="hacking-btn-glow"></span>
+                                    </button>
+                                </div>
+                            <div class="execute-container">
+                                <button type="submit" class="btn btn-primary">EXECUTE</button>
+                                <button type="button" id="stop-btn" class="btn btn-stop" disabled>STOP</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <h5 class="mb-0 d-flex align-items-center justify-content-between">
+                            <span>SYSTEM OUTPUT</span>
+                            <div>
+                                <span id="task-status" class="badge bg-secondary">READY</span>
+     <button id="download-result-btn" class="download-btn disabled"
+                                        title="DOWNLOAD RESULT AS PDF REPORT">
+                                    EXPORT PDF
+                                </button>
+                            </div>
+                        </h5>
+                    </div>
+                    <div class="card-body p-0">
+                        <div id="result-area" class="terminal">
+                            <div id="test-output">SYSTEM INITIALIZED. AWAITING INSTRUCTIONS...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="config-btn-container">
+                    <div class="matrix-gear-btn" id="open-settings">
+                        <span class="gear-text">CONFIG</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal-backdrop" class="modal-backdrop"></div>
+
+<div id="settings-modal" class="settings-modal">
+    <div class="settings-header">
+        <h4 class="settings-title">MATRIX SYSTEM SETTINGS</h4>
+        <button id="close-settings" class="settings-close">&times;</button>
+    </div>
+    <div class="settings-tabs">
+        <button id="api-settings-tab" class="settings-tab settings-tab-active">API SETTINGS</button>
+        <button id="user-management-tab" class="settings-tab">USER MANAGEMENT</button>
+        <button id="video-settings-tab" class="settings-tab">VIDEO SETTINGS</button>
+    </div>
+    <div class="settings-body">
+        <div id="api-settings-content" class="settings-tab-content">
+            <div class="settings-form-group">
+                <label for="api-provider">API PROVIDER</label>
+                <select id="api-provider" class="settings-select">
+                    <option value="anthropic">ANTHROPIC (CLAUDE)</option>
+                    <option value="openai">OPENAI</option>
+                    <option value="deepseek">DEEPSEEK</option>
+                    <option value="mistral">MISTRAL AI</option>
+                    <option value="gemini">GOOGLE (GEMINI)</option>
+                </select>
+            </div>
+            <div class="settings-form-group">
+                <label for="api-model">MODEL SELECTION</label>
+                <select id="api-model" class="settings-select">
+                    <option value="claude-3-5-sonnet-20240620">CLAUDE 3.5 SONNET</option>
+                    <option value="claude-3-opus-20240229">CLAUDE 3 OPUS</option>
+                    <option value="claude-3-sonnet-20240229">CLAUDE 3 SONNET</option>
+                    <option value="claude-3-haiku-20240307">CLAUDE 3 HAIKU</option>
+                </select>
+            </div>
+            <div class="settings-form-group">
+                <label for="api-key">API KEY</label>
+                <input type="password" id="api-key" class="settings-input" placeholder="ENTER API KEY">
+                <div class="use-default-key-container">
+                    <input type="checkbox" id="use-default-key" class="use-default-key-checkbox" checked>
+                    <label for="use-default-key" class="use-default-key-label">USE SAVED API KEY</label>
+                    <span class="key-status-tag" id="default-key-status">CONFIGURED</span>
+                </div>
+                <div class="settings-btn-container mt-2">
+                    <button id="test-api-key" class="settings-btn test-btn">TEST CONNECTION</button>
+                    <button id="show-hide-key" class="settings-btn ms-2">SHOW KEY</button>
+                </div>
+                <div id="api-key-status" class="settings-key-status" style="display: none;"></div>
+            </div>
+        </div>
+        <div id="user-management-content" class="settings-tab-content" style="display: none;">
+            <button id="add-user-btn" class="settings-btn mb-3">ADD NEW USER</button>
+            <div id="user-list" class="user-list-container">
+                <!-- User list will be populated here -->
+            </div>
+            <div id="add-user-form" style="display: none;">
+                <div class="settings-form-group">
+                    <label for="new-username">USERNAME</label>
+                    <input type="text" id="new-username" class="settings-input" placeholder="Enter username">
+                </div>
+                <div class="settings-form-group">
+                    <label for="new-password">PASSWORD</label>
+                    <input type="password" id="new-password" class="settings-input" placeholder="Enter password">
+                </div>
+                <div class="settings-form-group">
+                    <label for="new-role">ROLE</label>
+                    <select id="new-role" class="settings-select">
+                        <option value="user">USER</option>
+                        <option value="admin">ADMIN</option>
+                    </select>
+                </div>
+                <div class="settings-btn-container">
+                    <button id="create-user-btn" class="settings-btn">CREATE USER</button>
+                    <button id="cancel-user-btn" class="settings-btn cancel-btn">CANCEL</button>
+                </div>
+            </div>
+        </div>
+        <div id="video-settings-content" class="settings-tab-content" style="display: none;">
+            <div class="settings-form-group">
+                <label for="video-resolution">STREAMING RESOLUTION</label>
+                <select id="video-resolution" class="settings-select">
+                    <option value="1920x1080">FULL HD (1920x1080)</option>
+                    <option value="1600x900">HD+ (1600x900)</option>
+                    <option value="1366x768">HD (1366x768)</option>
+                    <option value="1280x720">HD 720p (1280x720)</option>
+                    <option value="1024x768">XGA (1024x768)</option>
+                    <option value="800x600">SVGA (800x600)</option>
+                </select>
+            </div>
+            <div class="settings-form-group">
+                <label for="video-quality">IMAGE QUALITY</label>
+                <select id="video-quality" class="settings-select">
+                    <option value="high">HIGH QUALITY (PNG)</option>
+                    <option value="medium">MEDIUM QUALITY (JPEG 90%)</option>
+                    <option value="low">LOW QUALITY (JPEG 70%)</option>
+                </select>
+            </div>
+            <div class="settings-form-group">
+                <label for="video-fps">REFRESH RATE</label>
+                <select id="video-fps" class="settings-select">
+                    <option value="0.5">REAL-TIME (0.5s)</option>
+                    <option value="1.0">FAST (1.0s)</option>
+                    <option value="2.0">NORMAL (2.0s)</option>
+                    <option value="3.0">SLOW (3.0s)</option>
+                </select>
+            </div>
+            <div class="settings-form-group recording-section">
+                <div class="recording-header">
+                    <label>VIDEO RECORDING</label>
+                    <div class="recording-status" id="recording-status">DISABLED</div>
+                </div>
+                <div class="recording-controls">
+                    <input type="checkbox" id="enable-recording" class="recording-checkbox">
+                    <label for="enable-recording" class="recording-label">ENABLE VIDEO RECORDING</label>
+                </div>
+                <div class="recording-info">
+                    <small>Videos will be saved and associated with execution workflows</small>
+                </div>
+            </div>
+            <div class="settings-btn-container">
+                <button id="test-video-settings" class="settings-btn test-btn">TEST SETTINGS</button>
+                <button id="reset-video-settings" class="settings-btn cancel-btn">RESET TO DEFAULT</button>
+            </div>
+            <div id="video-settings-status" class="settings-key-status" style="display: none;"></div>
+        </div>
+    </div>
+    <div class="settings-footer">
+        <button id="save-settings" class="settings-btn">SAVE</button>
+        <button id="cancel-settings" class="settings-btn cancel-btn">CANCEL</button>
+    </div>
+</div>
+
+
+<div id="history-modal" class="settings-modal">
+    <div class="settings-header">
+        <h4 class="settings-title">EXECUTION HISTORY</h4>
+        <button id="close-history" class="settings-close">&times;</button>
+    </div>
+    <div class="settings-body">
+        <div id="history-list" class="history-list-container">
+
+        </div>
+        <div class="history-controls">
+            <button id="clear-history" class="settings-btn cancel-btn">CLEAR ALL</button>
+        </div>
+    </div>
+</div>
+
+
+<div id="jiraModal" class="jira-modal" style="display: none;">
+    <div class="jira-modal-content">
+        <div class="jira-modal-header">
+            <h2 class="matrix-text">
+                <span class="matrix-icon">🎯</span> JIRA AUTOMATION TICKETS
+            </h2>
+            <span class="jira-close">&times;</span>
+        </div>
+
+        <div class="jira-modal-body">
+
+            <div id="jiraLoading" class="jira-loading">
+                <div class="matrix-spinner"></div>
+                <p class="matrix-text">Loading Jira tickets...</p>
+            </div>
+
+
+            <div id="jiraTicketsContainer" class="jira-tickets-container" style="display: none;">
+                <div class="jira-filter-bar">
+                    <input type="text" id="jiraSearchInput" placeholder="Search tickets..." class="jira-search-input">
+                    <select id="jiraStatusFilter" class="jira-status-filter">
+                        <option value="">All Status</option>
+                        <option value="Done">Done</option>
+                        <option value="In Progress">In Progress</option>
+                    </select>
+                </div>
+
+                <div id="jiraTicketsList" class="jira-tickets-list">
+
+                </div>
+            </div>
+
+            <div id="jiraError" class="jira-error" style="display: none;">
+                <p class="error-text">Error loading Jira tickets</p>
+                <button id="jiraRetryBtn" class="matrix-btn-small">Retry</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="hackingModal" class="hacking-modal" style="display: none;">
+    <div class="hacking-modal-content">
+        <div class="hacking-modal-header">
+            <h2 class="matrix-text">
+                <span class="matrix-icon">🛡️</span> SECURITY TESTING OPERATIONS
+            </h2>
+            <span class="hacking-close">&times;</span>
+        </div>
+
+        <div class="hacking-modal-body">
+
+            <div class="hacking-target-section">
+                <label for="hackingTargetUrl" class="hacking-label">TARGET URL</label>
+                <input type="text" id="hackingTargetUrl" class="hacking-target-input"
+                       placeholder="https://example.com" required>
+            </div>
+
+
+            <div id="hackingLoading" class="hacking-loading">
+                <div class="matrix-spinner"></div>
+                <p class="matrix-text">Loading security tests...</p>
+            </div>
+
+
+            <div id="hackingTestsContainer" class="hacking-tests-container" style="display: none;">
+                <div class="hacking-filter-bar">
+                    <input type="text" id="hackingSearchInput" placeholder="Search tests..." class="hacking-search-input">
+                    <select id="hackingCategoryFilter" class="hacking-category-filter">
+                        <option value="">All Categories</option>
+                        <option value="API Security Testing">API Security Testing</option>
+                        <option value="Access Control">Access Control</option>
+                        <option value="Access Control Bypass">Access Control Bypass</option>
+                        <option value="Application Logic">Application Logic</option>
+                        <option value="Authentication & Session Management">Authentication & Session Management</option>
+                        <option value="Authentication Bypass">Authentication Bypass</option>
+                        <option value="Authentication Security">Authentication Security</option>
+                        <option value="Business Logic Bypass">Business Logic Bypass</option>
+                        <option value="Business Logic Testing">Business Logic Testing</option>
+                        <option value="CORS Security Testing">CORS Security Testing</option>
+                        <option value="Chained Exploit">Chained Exploit</option>
+                        <option value="Clickjacking Testing">Clickjacking Testing</option>
+                        <option value="Client-Side Security Testing">Client-Side Security Testing</option>
+                        <option value="Client-Side Vulnerability">Client-Side Vulnerability</option>
+                        <option value="Cloud Security Misconfiguration">Cloud Security Misconfiguration</option>
+                        <option value="Comprehensive Testing">Comprehensive Testing</option>
+                        <option value="Container Security">Container Security</option>
+                        <option value="Cryptographic Attack">Cryptographic Attack</option>
+                        <option value="Denial of Service">Denial of Service</option>
+                        <option value="Error Handling & Information Disclosure">Error Handling & Information Disclosure</option>
+                        <option value="File Upload Testing">File Upload Testing</option>
+                        <option value="Information Disclosure">Information Disclosure</option>
+                        <option value="Information Gathering">Information Gathering</option>
+                        <option value="Input Validation">Input Validation</option>
+                        <option value="Input Validation Testing">Input Validation Testing</option>
+                        <option value="Network Security">Network Security</option>
+                        <option value="Post-Exploitation">Post-Exploitation</option>
+                        <option value="Privilege Escalation">Privilege Escalation</option>
+                        <option value="Protocol Exploit">Protocol Exploit</option>
+                        <option value="Reconnaissance">Reconnaissance</option>
+                        <option value="Remote Code Execution">Remote Code Execution</option>
+                        <option value="SSL/TLS Configuration">SSL/TLS Configuration</option>
+                        <option value="Security Headers Analysis">Security Headers Analysis</option>
+                        <option value="Security Misconfiguration">Security Misconfiguration</option>
+                        <option value="Sensitive Data Exposure">Sensitive Data Exposure</option>
+                        <option value="Server-Side Request Forgery">Server-Side Request Forgery</option>
+                        <option value="Session Management">Session Management</option>
+                        <option value="Supply Chain Attack">Supply Chain Attack</option>
+                        <option value="Web Cache Poisoning">Web Cache Poisoning</option>
+                    </select>
+                    <select id="hackingSeverityFilter" class="hacking-severity-filter">
+                        <option value="">All Severities</option>
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low">Low</option>
+                    </select>
+                </div>
+
+                <div id="hackingTestsList" class="hacking-tests-list">
+                </div>
+            </div>
+
+            <div id="hackingError" class="hacking-error" style="display: none;">
+                <p class="error-text">Error loading security tests</p>
+                <button id="hackingRetryBtn" class="matrix-btn-small">Retry</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="history-detail-modal" class="settings-modal large-modal">
+    <div class="settings-header">
+        <button id="close-history-detail" class="settings-close">&times;</button>
+    </div>
+    <div class="settings-body">
+        <div class="history-meta">
+            <div><span class="meta-label">TIMESTAMP:</span> <span id="history-detail-timestamp"></span></div>
+            <div><span class="meta-label">MODEL:</span> <span id="history-detail-model"></span></div>
+        </div>
+        <div id="history-detail-content" class="history-content terminal">
+        </div>
+    </div>
+    <div class="settings-footer">
+             <button id="download-history-detail" class="settings-btn">EXPORT PDF</button>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/crypto-js.min.js"></script>
+<script src="/js/matrix-app.js"></script>
+<script src="/js/jira-manager.js"></script>
+<script src="/js/hacking-manager.js"></script>
+<noscript>
+    <div style="background-color: #330000; color: #ff0000; padding: 20px; text-align: center; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999;">
+    </div>
+</noscript>
+</body>
+</html>

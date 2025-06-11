@@ -1,0 +1,10 @@
+{
+    "key": "HACK-056",
+    "summary": "OAuth 2.0 CSRF Attack",
+    "description": "Exploit a lack of a 'state' parameter in an OAuth 2.0 flow to trick a user into logging into the attacker's account.",
+    "category": "Authentication Bypass",
+    "severity": "High",
+    "testing_type": "Penetration Test",
+    "target": "OAuth 2.0 authentication flows",
+    "instructions": "1. Initiate the OAuth flow for your own account and capture the authorization URL.\n2. Check if the URL contains a random, non-guessable `state` parameter. If it does not, the flow is vulnerable.\n3. The attack is to send this URL (which links your attacker account) to a victim. When the victim clicks it, they will authorize your account and be logged into it within the application, potentially linking their data to your account."
+}

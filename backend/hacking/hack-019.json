@@ -1,0 +1,10 @@
+{
+    "key": "HACK-019",
+    "summary": "WebSocket Hijacking (CSWSH)",
+    "description": "Exploit a lack of origin validation on a WebSocket handshake to establish a cross-site WebSocket connection from a malicious page.",
+    "category": "Session Management",
+    "severity": "High",
+    "testing_type": "Penetration Test",
+    "target": "WebSocket Handshake Process",
+    "instructions": "1. Use the browser's developer tools (Network -> WS tab) to identify WebSocket connections and their handshake URL (e.g., `wss://target.com/chat`).\n2. Open the developer console. Execute JavaScript to initiate a connection to that URL from the current, unrelated origin: `var ws = new WebSocket('wss://target.com/chat'); ws.onopen = function() { console.log('Cross-site connection successful!'); };`\n3. If the 'Cross-site connection successful!' message appears in the console, the server is not validating the `Origin` header.\n4. This allows a malicious site to interact with the WebSocket on behalf of a user who visits it. Document the vulnerable endpoint and the console output."
+}

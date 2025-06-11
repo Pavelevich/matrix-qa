@@ -1,0 +1,10 @@
+{
+    "key": "HACK-080",
+    "summary": "Business Logic Flaw in Discount Application",
+    "description": "Manipulate the application of discounts or coupons to receive a larger discount than intended, such as applying the same coupon multiple times or applying a percentage discount to a negative quantity.",
+    "category": "Business Logic Bypass",
+    "severity": "Medium",
+    "testing_type": "Penetration Test",
+    "target": "E-commerce shopping cart",
+    "instructions": "1. Add an item to the cart and apply a valid coupon.\n2. Attempt to apply the same coupon again. If the discount is applied twice, document the flaw.\n3. Alternatively, try adding an item with a quantity of -1 (negative one). Then apply a percentage-based discount. If the application gives you a credit instead of a discount, the logic is flawed. Document the steps to reproduce."
+}

@@ -1,0 +1,10 @@
+{
+    "key": "HACK-029",
+    "summary": "Clickjacking / UI Redress Attack",
+    "description": "Test if the application can be loaded inside an iframe, making it vulnerable to clickjacking attacks.",
+    "category": "Client-Side Vulnerability",
+    "severity": "Medium",
+    "testing_type": "Security Assessment",
+    "target": "All sensitive pages (login, forms, settings)",
+    "instructions": "1. Navigate to a sensitive page on the target site.\n2. Use the browser's developer tools to inspect the response headers. Look for the `X-Frame-Options` header or the `frame-ancestors` directive in the `Content-Security-Policy` header.\n3. If both headers are absent, the page is likely vulnerable.\n4. To confirm, create a simple local HTML file with the content: `<style>iframe { opacity: 0.5; }</style><h1>Click the button below!</h1><iframe src='https://target-site.com/sensitive-page' width='500' height='500'></iframe>`.\n5. Open this HTML file in the browser. If the target site renders within the iframe, it is vulnerable. Document the lack of headers and the successful framing."
+}

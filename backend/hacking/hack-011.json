@@ -1,0 +1,10 @@
+{
+    "key": "HACK-011",
+    "summary": "Insecure Deserialization Exploit Chain",
+    "description": "Identify and exploit insecure deserialization to achieve Remote Code Execution (RCE) by manipulating serialized objects passed in requests.",
+    "category": "Remote Code Execution",
+    "severity": "Critical",
+    "testing_type": "Penetration Test",
+    "target": "Endpoints processing serialized data from cookies or parameters",
+    "instructions": "1. In the browser's storage inspector, look for cookies or session storage values that are Base64 encoded or have a recognizable format for Java, PHP, or .NET.\n2. Use an offline tool (like `ysoserial`) to generate a benign gadget chain payload for the suspected technology. The payload should trigger a DNS lookup to a server you control.\n3. Using the browser's console, reissue the request that sends the cookie/parameter, but substitute the original value with your malicious payload.\n4. Monitor your DNS server. If a lookup is received, the target is vulnerable. Document the vulnerable parameter, the payload, and the evidence of the callback."
+}

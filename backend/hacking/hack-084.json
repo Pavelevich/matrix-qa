@@ -1,0 +1,10 @@
+{
+    "key": "HACK-084",
+    "summary": "Leaked Credentials in Public Repositories",
+    "description": "Search public code repositories (GitHub, GitLab) for hardcoded API keys, tokens, or credentials related to the target application or company.",
+    "category": "Sensitive Data Exposure",
+    "severity": "Critical",
+    "testing_type": "Reconnaissance",
+    "target": "Public source code repositories",
+    "instructions": "1. Navigate to GitHub/GitLab search.\n2. Use advanced search queries to find credentials associated with the target's domain. Examples: `\"target.com\" \"API_KEY\"`, `\"target.com\" password`, `filename:.npmrc _auth`.\n3. Sift through the results for any hardcoded secrets.\n4. If a valid credential is found, document its location. Do not use the credential; report its existence immediately."
+}

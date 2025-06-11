@@ -1,0 +1,10 @@
+{
+    "key": "HACK-085",
+    "summary": "Log Poisoning to Achieve RCE",
+    "description": "Inject malicious code into a log file via a web request, then use a Local File Inclusion (LFI) vulnerability to parse the log file and execute the code.",
+    "category": "Chained Exploit",
+    "severity": "Critical",
+    "testing_type": "Penetration Test",
+    "target": "LFI vulnerabilities",
+    "instructions": "1. Pre-requisite: An LFI vulnerability (the ability to include local files like `/var/log/apache2/access.log`) must be confirmed.\n2. Make a request to the server, injecting PHP code into a parameter that you know will be logged, such as the User-Agent header or a 404 path. Payload: `<?php system($_GET['cmd']); ?>`.\n3. Use the LFI vulnerability to include the log file: `?page=/var/log/apache2/access.log`.\n4. Now, add your command to the query string: `&cmd=ls`. If the command executes, you have achieved RCE. Document the full attack chain."
+}

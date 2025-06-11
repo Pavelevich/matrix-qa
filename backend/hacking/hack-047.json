@@ -1,0 +1,10 @@
+{
+    "key": "HACK-047",
+    "summary": "HTTP/2 Header Cracking",
+    "description": "Inject newline characters into HTTP/2 headers to see if they are improperly processed, potentially leading to XSS or other injection flaws.",
+    "category": "Protocol Exploit",
+    "severity": "Medium",
+    "testing_type": "Vulnerability Assessment",
+    "target": "HTTP/2 enabled servers",
+    "instructions": "1. Find a part of the application that reflects a request header value in the response body.\n2. Use a browser extension or intercepting proxy to replay the request, injecting a newline character (`%0a`) into the header value (e.g., `User-Agent: value%0a<script>alert(1)</script>`).\n3. If the `<script>` tag is rendered on a new line in the HTML response and executes, the server is vulnerable to header injection."
+}

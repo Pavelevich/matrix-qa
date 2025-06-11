@@ -1,0 +1,10 @@
+{
+    "key": "HACK-015",
+    "summary": "Race Condition (TOCTOU) Exploit",
+    "description": "Exploit Time-of-Check-to-Time-of-Use flaws to bypass business logic, such as using a promo code multiple times.",
+    "category": "Business Logic Bypass",
+    "severity": "Medium",
+    "testing_type": "Penetration Test",
+    "target": "Multi-step actions like redeeming coupons or voting",
+    "instructions": "1. Identify a multi-step process with a resource that is checked and then used (e.g., applying a single-use coupon).\n2. Using the browser console, prepare a `fetch` request for the final action (e.g., `POST /api/checkout`).\n3. Write a simple loop to execute this `fetch` request in rapid succession (e.g., 20 times in parallel using `Promise.all`).\n4. Trigger the loop. Then, inspect your account or the application state.\n5. If the single-use resource was successfully used more than once, the system is vulnerable. Document the initial state and the final state as proof."
+}

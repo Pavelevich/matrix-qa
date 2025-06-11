@@ -1,0 +1,10 @@
+{
+    "key": "HACK-083",
+    "summary": "Padding Oracle Attack",
+    "description": "Decrypt encrypted data by exploiting padding validation errors in a block cipher implementation, allowing you to decrypt one byte at a time.",
+    "category": "Cryptographic Attack",
+    "severity": "Critical",
+    "testing_type": "Penetration Test",
+    "target": "CBC-mode encryption implementations",
+    "instructions": "1. Find an encrypted value passed in a parameter or cookie that, when tampered with, returns a specific 'invalid padding' error.\n2. This error acts as an 'oracle'. You can now systematically modify the last byte of the preceding ciphertext block until the padding is correct, which allows you to deduce the value of the last byte of the plaintext.\n3. Use an automated tool (like `padbuster`) to perform this attack byte-by-byte, feeding it the application's cookies and the specific error message.\n4. Successful decryption of the cookie/parameter proves the vulnerability."
+}

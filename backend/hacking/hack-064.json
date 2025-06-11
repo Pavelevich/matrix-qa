@@ -1,0 +1,10 @@
+{
+    "key": "HACK-064",
+    "summary": "State Machine Abuse in Multi-Step Processes",
+    "description": "Bypass required steps in a sequential process (e.g., a checkout or registration flow) by navigating directly to a later step's URL.",
+    "category": "Business Logic Bypass",
+    "severity": "Medium",
+    "testing_type": "Penetration Test",
+    "target": "Sequential user workflows",
+    "instructions": "1. Start a multi-step process, such as an e-commerce checkout (Step 1: Cart, Step 2: Payment, Step 3: Confirmation).\n2. Complete step 1 and proceed to step 2. Capture the URL for step 2.\n3. Open a new browser session, add an item to the cart, but instead of proceeding normally, navigate directly to the captured URL for step 3 (Confirmation).\n4. If the application completes the order without requiring payment, its state machine is flawed. Document the steps to reproduce the bypass."
+}

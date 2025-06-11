@@ -1,0 +1,10 @@
+{
+    "key": "HACK-071",
+    "summary": "Content Security Policy (CSP) Bypass via JSONP",
+    "description": "Bypass a weak CSP by finding a JSONP endpoint on an allowed domain that allows arbitrary callback functions, leading to XSS.",
+    "category": "Client-Side Vulnerability",
+    "severity": "High",
+    "testing_type": "Penetration Test",
+    "target": "Content Security Policy",
+    "instructions": "1. Analyze the application's CSP header. Identify the domains allowed in the `script-src` directive.\n2. Scan those allowed domains for JSONP endpoints (often look like `/api?callback=...`).\n3. If a JSONP endpoint is found, attempt to inject a malicious payload into the `callback` parameter. Example: `?callback=alert(document.domain)//`.\n4. If the script executes, you have bypassed the CSP by leveraging a trusted domain. Document the vulnerable JSONP endpoint and the payload."
+}

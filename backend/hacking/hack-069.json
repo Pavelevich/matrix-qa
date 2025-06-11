@@ -1,0 +1,10 @@
+{
+    "key": "HACK-069",
+    "summary": "WebRTC IP Leakage",
+    "description": "Determine if the application uses WebRTC and if its implementation leaks the user's true internal/external IP address, even when behind a VPN.",
+    "category": "Information Disclosure",
+    "severity": "Low",
+    "testing_type": "Security Assessment",
+    "target": "WebRTC implementations",
+    "instructions": "1. Navigate the application and look for features using video/audio chat or peer-to-peer connections.\n2. Open the browser console and execute a standard WebRTC STUN request script (many are available online).\n3. The script will create a peer connection and inspect the ICE candidates.\n4. If any of the generated candidates reveal your actual public or private IP address, the application is leaking this information. Document the finding."
+}

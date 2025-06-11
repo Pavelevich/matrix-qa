@@ -1,0 +1,10 @@
+{
+    "key": "HACK-049",
+    "summary": "Abusing Pre-Signed URLs",
+    "description": "Find features that generate pre-signed URLs (e.g., for S3) and test if the permissions are overly permissive.",
+    "category": "Access Control",
+    "severity": "High",
+    "testing_type": "Vulnerability Assessment",
+    "target": "File upload/download features using cloud storage",
+    "instructions": "1. Find a feature that lets you upload or download a file, and capture the request that generates the URL.\n2. The URL will contain signature and expiration parameters. Examine the permissions granted.\n3. Modify the HTTP verb. If a URL for a GET (download) request also works with PUT (upload) or DELETE, the permissions are too broad.\n4. Attempt to manipulate the object key in the URL to access other files. Document any unauthorized access."
+}

@@ -1,0 +1,10 @@
+{
+    "key": "HACK-082",
+    "summary": "XS-Leaks via Timing Side-Channels",
+    "description": "Infer sensitive information about a user (e.g., their name's length, whether they are in a specific group) by measuring the time it takes for cross-site requests to respond.",
+    "category": "Information Disclosure",
+    "severity": "Medium",
+    "testing_type": "Side-Channel Attack",
+    "target": "Endpoints with variable response times",
+    "instructions": "1. Identify a feature that responds with different timing based on user data. A search feature is a classic example.\n2. Create a malicious page that uses `fetch` to make a cross-site request to this search feature within a `window.open` popup.\n3. Time the request. For example, search for `?q=admin_a`. If it's faster than `?q=admin_z`, you can infer information character by character.\n4. This is a complex, statistical attack. The goal is to prove that a timing difference exists and can be measured cross-site."
+}
