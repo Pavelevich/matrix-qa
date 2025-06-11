@@ -39,6 +39,7 @@
 
 Matrix QA Test Runner is a cutting-edge, AI-powered testing platform designed to revolutionize quality assurance and security testing workflows. Built with a Matrix-themed interface, it combines the power of multiple AI providers with intelligent browser automation to deliver comprehensive testing solutions including advanced security vulnerability assessments.
 
+[![How use it?](assets/preview.png)](assets/guide.mp4)
 
 **Powered by [Browser-Use](https://browser-use.com/)** - The platform leverages the browser-use agent technology as its core automation engine, integrated seamlessly into the backend with custom modifications to store execution results and screenshots directly in MongoDB for comprehensive test tracking and analysis.
 
