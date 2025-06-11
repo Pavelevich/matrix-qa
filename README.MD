@@ -113,7 +113,7 @@ Matrix QA Test Runner is a cutting-edge, AI-powered testing platform designed to
 
 ### Prerequisites
 
-- **Python 3.8+**
+- **Python 3.12.3**
 - **MongoDB 4.0+**
 - **Node.js 14+** (for frontend dependencies)
 - **FFmpeg** (optional, for MP4 video recording)
