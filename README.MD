@@ -18,7 +18,7 @@
 
 <p align="center">
   <a href="https://fastapi.tiangolo.com" target="_blank"><img src="https://img.shields.io/badge/FastAPI-000000?style=for-the-badge&logo=fastapi&logoColor=00FF00" alt="FastAPI"></a>
-  <a href="https://www.python.org" target="_blank"><img src="https://img.shields.io/badge/python-3.8+-000000?style=for-the-badge&logo=python&logoColor=00FF00" alt="Python"></a>
+  <a href="https://www.python.org" target="_blank"><img src="https://img.shields.io/badge/python-3.12+-000000?style=for-the-badge&logo=python&logoColor=00FF00" alt="Python"></a>
   <a href="https://www.mongodb.com" target="_blank"><img src="https://img.shields.io/badge/MongoDB-000000?style=for-the-badge&logo=mongodb&logoColor=00FF00" alt="MongoDB"></a>
   <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API" target="_blank"><img src="https://img.shields.io/badge/WebSocket-Real--time-000000?style=for-the-badge&logo=websocket&logoColor=00FF00" alt="WebSocket"></a>
   <a href="https://owasp.org" target="_blank"><img src="https://img.shields.io/badge/Security-Testing-000000?style=for-the-badge&logo=lock&logoColor=00FF00" alt="Security"></a>
